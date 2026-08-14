@@ -585,34 +585,37 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
 
 <script>
 /* ==================== SESSION CONFIG ====================
-   ANCHOR_DATE: any past or future session date (YYYY-MM-DD). Sessions repeat
-   every INTERVAL_DAYS from it, forever. Cards for the next CARDS_SHOWN future
-   dates render automatically; a session stays "upcoming" until END_HOUR that day.
+   EXPLICIT_DATES: the confirmed upcoming sessions (YYYY-MM-DD), in order.
+   After the last one, cards continue automatically every INTERVAL_DAYS.
+   Past sessions drop off after END_HOUR on their day.
 
    BOOKS: when a book is voted and the Luma event is created, add one entry
-   keyed by the session date. Dates without an entry show "To be voted" and
-   link to the club's Luma calendar page (LUMA_CALENDAR).                    */
-const ANCHOR_DATE   = "2026-08-27";
-const INTERVAL_DAYS = 14;
-const CARDS_SHOWN   = 3;
-const SESSION_TIME  = "18:00";
-const END_HOUR      = 21; /* card rolls over after 21:00 on session day */
-const LUMA_CALENDAR = "https://luma.com/ceobookclub";
+   keyed by the session date. An entry may have just a url (event exists,
+   book not voted yet). Dates without an entry link to LUMA_CALENDAR.       */
+const EXPLICIT_DATES = ["2026-10-07","2026-10-14"];
+const INTERVAL_DAYS  = 14;
+const CARDS_SHOWN    = 3;
+const SESSION_TIME   = "18:00";
+const END_HOUR       = 21; /* card rolls over after 21:00 on session day */
+const LUMA_CALENDAR  = "https://luma.com/ceobookclub";
 const BOOKS = {
-  /* an entry may have just a url (event exists, book not voted yet) */
-  "2026-08-27": { title:"Why Nations Fail", author:"Daron Acemoglu & James A. Robinson", url:"https://luma.com/5y9z1sa9" },
-  "2026-09-10": { url:"https://luma.com/j1ztz4z6" },
+  "2026-10-07": { title:"Why Nations Fail", author:"Daron Acemoglu & James A. Robinson", url:"https://luma.com/5y9z1sa9" },
+  "2026-10-14": { url:"https://luma.com/j1ztz4z6" },
 };
 /* ======================================================== */
 
 function nextSessions(){
-  const anchor = new Date(ANCHOR_DATE + "T00:00:00");
   const now = new Date();
-  const msPerDay = 864e5, step = INTERVAL_DAYS * msPerDay;
-  /* first cycle index whose session hasn't ended yet */
-  let k = Math.ceil((now - anchor - END_HOUR*36e5) / step);
-  if (k < 0) k = 0;
-  return Array.from({length: CARDS_SHOWN}, (_,i) => new Date(anchor.getTime() + (k+i)*step));
+  const ended = d => now > new Date(d.getTime() + END_HOUR*36e5);
+  const listed = EXPLICIT_DATES.map(s => new Date(s + "T00:00:00"));
+  const out = listed.filter(d => !ended(d));
+  let last = listed[listed.length-1] || new Date();
+  while (out.length < CARDS_SHOWN){
+    last = new Date(last);
+    last.setDate(last.getDate() + INTERVAL_DAYS); /* DST-safe day arithmetic */
+    if (!ended(last)) out.push(last);
+  }
+  return out.slice(0, CARDS_SHOWN);
 }
 function key(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function renderSessions(){
