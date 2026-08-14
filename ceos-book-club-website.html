@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CEO's Book Club · Belgrade's student book club</title>
+<meta name="description" content="A book club for Belgrade students. Big ideas, real discussions, every two weeks at FEFA. In English. Bring opinions.">
+<link rel="icon" href="images/logo-square.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* white-cream printing paper */
+  --paper:#F8F4E9;
+  --paper-deep:#EFE8D8;
+  --paper-dark:#F1EAD9; /* gently darker band for header and footer */
+  --ink:#1E1B16;
+  --red:#B3402A;
+  --pencil:#8A8578;
+  --font-display:'Space Grotesk',sans-serif;
+  --font-marker:'Space Grotesk',sans-serif;
+  --font-hand:'Lora',Georgia,serif;
+  --font-body:'Lora',Georgia,serif;
+  --font-mono:'Space Grotesk',sans-serif; /* labels: same grotesque, spaced small caps */
+  --postit:#F5DF6B;
+  --postit2:#F2A98F;
+  --postit3:#A9CFDE;
+  --board:#25281F;
+  --chalk:#EFEAD9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+/* paper grain: fine tooth over everything, so ink and images read as printed into the sheet */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:.55;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.55 0 0 0 0 0.52 0 0 0 0 0.45 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* paper fibers: soft large-scale mottling, like uncoated stock */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.4;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.40 0 0 0 0 0.30 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+img{max-width:100%;display:block}
+.blend{mix-blend-mode:multiply;filter:contrast(1.02)}
+a{color:inherit}
+.container{max-width:1060px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--font-mono);font-weight:500;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pencil)}
+.hand{font-family:var(--font-hand)}
+
+/* red highlighter swipe */
+.highlight{
+  background:linear-gradient(100deg,transparent 0%,rgba(179,64,42,.30) 4%,rgba(179,64,42,.22) 50%,rgba(179,64,42,.28) 96%,transparent 100%);
+  border-radius:.25em .1em .3em .12em;padding:.02em .18em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  mix-blend-mode:multiply;
+}
+.fefa-link{text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--red) 55%,transparent)}
+.fefa-link:hover{color:var(--red);border-bottom-color:var(--red)}
+
+/* red pen underline */
+.redline{position:relative;white-space:nowrap}
+.redline::after{
+  content:"";position:absolute;left:-2%;right:-2%;bottom:-.06em;height:.28em;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M3 8 C 40 4, 90 9, 130 6 S 190 5, 197 7' fill='none' stroke='%23B3402A' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+
+/* post-it notes */
+.sticky{
+  display:inline-block;font-family:var(--font-marker);font-weight:700;letter-spacing:-.01em;color:#2A2418;
+  background:linear-gradient(178deg,color-mix(in srgb,var(--postit) 92%,#fff) 0%,var(--postit) 60%,color-mix(in srgb,var(--postit) 88%,#8a7020) 100%);
+  padding:.08em .35em .12em;line-height:1.15;transform:rotate(-2.5deg);
+  box-shadow:1px 4px 8px rgba(30,27,22,.22),0 1px 2px rgba(30,27,22,.15);
+  border-radius:1px;position:relative;
+}
+.sticky.alt{background:linear-gradient(178deg,color-mix(in srgb,var(--postit2) 92%,#fff),var(--postit2) 60%,color-mix(in srgb,var(--postit2) 85%,#7a3a20));transform:rotate(1.8deg)}
+.sticky.alt2{background:linear-gradient(178deg,color-mix(in srgb,var(--postit3) 94%,#fff),var(--postit3) 60%,color-mix(in srgb,var(--postit3) 85%,#2a5a70));transform:rotate(-1.2deg)}
+.sticky::after{content:"";position:absolute;right:0;bottom:0;width:.55em;height:.55em;
+  background:linear-gradient(315deg,rgba(30,27,22,.18) 0%,transparent 55%)}
+
+/* blackboard panel */
+.board{
+  background:var(--board);
+  background-image:radial-gradient(ellipse 120% 90% at 30% 20%,rgba(255,255,255,.045),transparent 60%),
+                   radial-gradient(ellipse 100% 80% at 75% 85%,rgba(255,255,255,.03),transparent 55%);
+  color:var(--chalk);border-radius:14px;padding:64px 40px 56px;position:relative;
+  box-shadow:inset 0 0 60px rgba(0,0,0,.45),2px 6px 0 color-mix(in srgb,var(--ink) 25%,transparent);
+}
+.board .mono{color:color-mix(in srgb,var(--chalk) 60%,transparent)}
+
+/* wavy ink divider */
+.divider{border:none;height:14px;margin:0 auto;max-width:1060px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 14' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C 60 4, 120 11, 200 7 S 340 4, 420 8 S 560 10, 598 6' fill='none' stroke='%231E1B16' stroke-width='1.1' opacity='.55'/%3E%3C/svg%3E") no-repeat center/100% auto;
+}
+
+/* nav */
+nav{position:sticky;top:0;z-index:900;background:color-mix(in srgb,var(--paper-dark) 94%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:8px 24px;max-width:1060px;margin:0 auto}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo .mark{height:58px;width:auto;mix-blend-mode:multiply}
+.nav-logo .wordmark{height:46px;width:auto;mix-blend-mode:multiply}
+.nav-links{display:flex;gap:26px;align-items:center;list-style:none}
+.nav-links a{font-family:var(--font-mono);font-weight:500;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;position:relative}
+.nav-links a:hover{color:var(--red)}
+.nav-links a:not(.btn)::after,.footer-inner a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-5px;height:4px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'%3E%3Cpath d='M2 4 C 25 2, 60 5, 98 3' fill='none' stroke='%23B3402A' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+  transform:scaleX(0);transform-origin:left;transition:transform .22s ease;
+}
+.footer-inner a{position:relative}
+.nav-links a:not(.btn):hover::after,.footer-inner a:hover::after{transform:scaleX(1)}
+.btn{
+  display:inline-block;font-family:var(--font-display);font-size:1.02rem;font-weight:600;
+  padding:.6em 1.4em;color:var(--ink);text-decoration:none;
+  border:2px solid var(--ink);border-radius:255px 15px 225px 15px/15px 225px 15px 255px;
+  background:transparent;transition:all .18s ease;cursor:pointer
+}
+.btn:hover{
+  background-image:repeating-linear-gradient(45deg,transparent,transparent 3px,color-mix(in srgb,var(--ink) 16%,transparent) 3px,color-mix(in srgb,var(--ink) 16%,transparent) 4px),
+                   repeating-linear-gradient(-45deg,transparent,transparent 3px,color-mix(in srgb,var(--ink) 10%,transparent) 3px,color-mix(in srgb,var(--ink) 10%,transparent) 4px);
+  transform:translateY(-1px)
+}
+.btn-red{border-color:var(--red);color:var(--red)}
+.btn-red:hover{background-image:repeating-linear-gradient(45deg,transparent,transparent 3px,color-mix(in srgb,var(--red) 18%,transparent) 3px,color-mix(in srgb,var(--red) 18%,transparent) 4px),
+                   repeating-linear-gradient(-45deg,transparent,transparent 3px,color-mix(in srgb,var(--red) 12%,transparent) 3px,color-mix(in srgb,var(--red) 12%,transparent) 4px)}
+
+/* sections */
+section{position:relative}
+.section-pad{padding:88px 0}
+.kicker{display:inline-block;margin-bottom:14px}
+span.kicker.mono{font-family:var(--font-mono);color:#2A2418;background:var(--postit);padding:5px 12px 6px;transform:rotate(-1.5deg);box-shadow:1px 3px 6px rgba(30,27,22,.18);border-radius:1px}
+h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.7rem,3.4vw,2.4rem);line-height:1.15;margin-bottom:22px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.two-col .text p+p{margin-top:16px}
+.margin-note{font-family:var(--font-hand);font-style:italic;font-size:1rem;color:var(--pencil);line-height:1.35}
+
+/* hero: large centered sketch, text overlapping its low-fidelity right side */
+.hero{position:relative;padding:0 0 20px;display:flex;justify-content:center}
+.hero-art{width:min(1300px,92vw)}
+.hero-art img{width:100%;mix-blend-mode:multiply;filter:contrast(1.02)}
+/* paper wash under the text zone: fades the drawing's right side for readability */
+.hero::after{content:"";position:absolute;right:0;top:0;bottom:0;width:55%;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,transparent 0%,color-mix(in srgb,var(--paper) 45%,transparent) 28%,color-mix(in srgb,var(--paper) 68%,transparent) 60%,color-mix(in srgb,var(--paper) 78%,transparent) 100%)}
+.hero-text{
+  position:absolute;z-index:2;top:50%;transform:translateY(-50%);
+  right:max(32px,calc((100vw - 1400px)/2));
+  text-align:right;max-width:560px;
+}
+.hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(1.9rem,3.7vw,3rem);line-height:1.15;letter-spacing:-.01em}
+.hero h1 .redline{white-space:normal}
+.hero p.lede{margin-top:22px;font-size:1.1rem;margin-left:auto;max-width:28em}
+.hero .cta-row{margin-top:28px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.hero-note{font-family:var(--font-hand);font-style:italic;font-size:.95rem;color:var(--pencil)}
+
+/* quote */
+.quote{padding:84px 0;text-align:center}
+.quote blockquote{
+  font-family:var(--font-display);font-weight:500;font-size:clamp(1.35rem,2.7vw,2.05rem);
+  line-height:1.45;max-width:26em;margin:0 auto;color:var(--chalk);
+  text-shadow:0 0 6px rgba(239,234,217,.2)
+}
+.quote blockquote .redline::after{filter:brightness(1.5) saturate(1.2)}
+.quote .attribution{margin-top:22px}
+.quote .legs{margin-top:38px;display:flex;gap:22px;justify-content:center;flex-wrap:wrap}
+.quote .legs .sticky{font-size:1.05rem;padding:.7em .8em .85em;min-width:7.5em}
+.quote .legs .sticky small{display:block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;margin-top:4px;opacity:.65}
+
+/* editor's note */
+.editor-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:56px;align-items:start}
+.editor-comp{position:sticky;top:110px;max-width:290px;margin:0 auto}
+.editor-comp .portrait{width:100%}
+.editor-comp .caption{margin-top:10px;text-align:center}
+.letter p{margin-bottom:16px}
+.letter .signoff{margin-top:26px}
+.letter .signature{font-family:var(--font-display);font-weight:700;font-size:1.25rem}
+.letter .credentials{display:block;margin-top:8px;line-height:1.8;max-width:34em;text-transform:none;letter-spacing:.02em;font-size:.74rem}
+
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:26px}
+.step{position:relative}
+.step .num{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:#2A2418;background:var(--postit);display:inline-block;padding:.05em .45em .1em;transform:rotate(-2deg);box-shadow:1px 3px 6px rgba(30,27,22,.18);margin-bottom:12px}
+.step h3{font-family:var(--font-display);font-size:1.25rem;font-weight:600;margin-bottom:6px}
+.step p{font-size:.95rem}
+.callouts{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px}
+.callout{
+  padding:22px 26px;border:1.5px dashed var(--pencil);
+  border-radius:255px 15px 225px 15px/15px 225px 15px 255px;
+}
+.callout p.big{font-family:var(--font-display);font-weight:600;font-size:1.08rem;margin-bottom:6px}
+.callout p.small{font-size:.92rem}
+
+/* the list */
+.list-intro{text-align:center;max-width:46em;margin:0 auto 8px}
+.list-hero{margin:10px auto 34px;max-width:920px}
+.list-scroll{
+  max-height:74vh;overflow-y:auto;border:1.5px solid var(--ink);border-radius:10px 3px 10px 3px;
+  background:color-mix(in srgb,var(--paper) 60%,#fff 10%);
+  scrollbar-width:thin;scrollbar-color:var(--red) transparent;
+}
+.list-scroll::-webkit-scrollbar{width:10px}
+.list-scroll::-webkit-scrollbar-thumb{background:var(--red);border-radius:6px;border:3px solid var(--paper)}
+.cat-head{
+  position:sticky;top:0;z-index:5;background:var(--paper);
+  padding:16px 26px 12px;border-bottom:1.5px solid color-mix(in srgb,var(--ink) 20%,transparent);
+  display:flex;gap:14px;align-items:baseline;flex-wrap:wrap
+}
+.cat-head .cat-num{font-family:var(--font-mono);font-size:.72rem;color:#2A2418;background:var(--postit);padding:3px 9px 4px;transform:rotate(-1.5deg);box-shadow:1px 2px 5px rgba(30,27,22,.18)}
+.cat-head h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem}
+.cat-head .tagline{font-family:var(--font-hand);font-style:italic;font-size:.9rem;color:var(--pencil);flex-basis:100%}
+.book{display:grid;grid-template-columns:56px 1fr;gap:8px;padding:20px 26px;border-bottom:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}
+.book:last-child{border-bottom:none}
+.book-num{font-family:var(--font-mono);font-size:.85rem;color:var(--pencil);padding-top:3px}
+.book h4{font-family:var(--font-display);font-weight:600;font-size:1.05rem;display:inline}
+.book .author{font-family:var(--font-hand);font-style:italic;font-size:.95rem;color:var(--pencil);margin-left:8px}
+.badge-read{
+  display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--paper);background:var(--red);padding:2px 8px 3px;border-radius:2px;margin-left:10px;transform:rotate(-1deg);vertical-align:middle
+}
+.book-why{font-size:.92rem;margin-top:6px;max-width:62em}
+.book-meta{margin-top:8px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.book-meta .prov{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:var(--pencil)}
+.book-meta a{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:var(--red);text-decoration:none;position:relative}
+.book-meta a:hover{text-decoration:underline}
+.list-note{text-align:center;margin-top:18px}
+
+/* sessions */
+.sessions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:30px}
+.session-card{
+  position:relative;padding:26px 26px 24px;border:1.5px solid var(--ink);
+  border-radius:12px 3px 12px 3px;background:color-mix(in srgb,var(--paper) 70%,#fff 8%);
+  display:flex;flex-direction:column;gap:6px
+}
+.session-card .date{font-family:var(--font-display);font-weight:700;font-size:1.5rem;line-height:1.1}
+.session-card .time{margin-bottom:8px}
+.session-card .book-title{font-family:var(--font-body);font-style:italic;font-size:1.05rem}
+.session-card .book-author{font-size:.9rem;color:var(--pencil);margin-bottom:14px}
+.session-card .btn{margin-top:auto;align-self:flex-start;font-size:.92rem;padding:.5em 1.1em}
+.session-card .tag-next{position:absolute;top:-14px;right:14px;font-size:.85rem;padding:.25em .7em .35em}
+.sessions-note{margin-top:18px;text-align:center}
+.tier .apply-btn{margin-top:16px;font-size:.92rem;padding:.5em 1.1em;display:inline-block}
+
+/* cta */
+.join{text-align:center;padding:90px 0 40px}
+.join .chair{width:min(92%,640px);margin:0 auto 4px}
+.join h2{margin-bottom:14px}
+.join p{max-width:34em;margin:0 auto 14px}
+.join .mono{display:block;margin-top:20px}
+/* membership tiers inside CTA */
+.tiers{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:54px auto 0;max-width:860px;border:1.5px solid var(--ink);border-radius:12px 3px 12px 3px;overflow:hidden;text-align:left}
+.tier{padding:28px 30px}
+.tier.guest{border-right:1.5px dashed var(--pencil)}
+.tier h3{font-family:var(--font-display);font-size:1.35rem;font-weight:700;margin-bottom:4px}
+.tier .sub{margin-bottom:16px;display:block}
+.tier ul{list-style:none}
+.tier li{padding-left:1.4em;position:relative;margin-bottom:10px;font-size:.95rem}
+.tier li::before{content:"·";position:absolute;left:0;color:var(--pencil)}
+.tier.member li::before{content:"✓";color:var(--red);font-weight:700}
+.tier.member{background:color-mix(in srgb,var(--ink) 4%,var(--paper))}
+.tier .price{font-family:var(--font-marker);font-weight:700;font-size:.95rem;margin-top:14px}
+
+/* footer */
+footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(--ink) 14%,transparent);padding:36px 0 44px}
+.footer-inner{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.footer-inner .mark{height:44px;width:auto;mix-blend-mode:multiply}
+.footer-inner .hand{font-family:var(--font-hand);font-style:italic;font-size:1.05rem;color:var(--pencil)}
+.footer-inner a:hover{color:var(--red)}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:860px){
+  .two-col,.editor-grid,.callouts,.tiers{grid-template-columns:1fr;gap:32px}
+  .steps{grid-template-columns:1fr;gap:26px}
+  .editor-comp{position:static;max-width:290px;margin:0 auto}
+  .nav-links{gap:16px}
+  .nav-links li.hide-m{display:none}
+  .nav-logo .mark{height:42px}
+  .nav-logo .wordmark{height:34px}
+  .section-pad{padding:60px 0}
+  .hero{padding:24px 0 12px;flex-direction:column;align-items:stretch}
+  .hero::after{display:none}
+  .hero-art{width:100%;padding:0 8px}
+  .hero-text{position:static;transform:none;text-align:left;max-width:none;padding:12px 20px 24px}
+  .hero p.lede{margin-left:0}
+  .hero .cta-row{justify-content:flex-start}
+  .quote{padding:56px 0}
+  .board{padding:40px 22px 36px}
+  .quote .legs{gap:14px}
+  .quote .legs .sticky{font-size:.95rem;min-width:6.5em}
+  .tiers{gap:0;margin-top:44px}
+  .tier.guest{border-right:none;border-bottom:1.5px dashed var(--pencil)}
+  .join .chair{width:100%}
+  .list-scroll{max-height:70svh;-webkit-overflow-scrolling:touch}
+  .sessions-grid{grid-template-columns:1fr;gap:20px}
+  .book{grid-template-columns:34px 1fr;padding:16px 16px}
+  .book .author{display:block;margin-left:0;margin-top:2px}
+  .badge-read{margin-left:0;margin-top:6px;display:inline-block}
+  .book-meta{gap:12px}
+  .cat-head{padding:14px 16px 10px}
+  .footer-inner{flex-direction:column;text-align:center;gap:14px}
+}
+@media(max-width:480px){
+  body{font-size:16px}
+  .container{padding:0 18px}
+  .hero h1{font-size:1.55rem}
+  .hero p.lede{font-size:1rem}
+  .letter .credentials{font-size:.68rem}
+  h2{font-size:1.5rem}
+  .quote blockquote{font-size:1.2rem}
+  .callout{padding:18px 20px}
+  .tier{padding:22px 20px}
+  .btn{font-size:.95rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#top">
+      <img src="images/logo-horizontal.png" alt="" class="mark">
+      <img src="images/logo-wordmark.png" alt="CEO's Book Club" class="wordmark">
+    </a>
+    <ul class="nav-links">
+      <li class="hide-m"><a href="#editor">The editor</a></li>
+      <li class="hide-m"><a href="#how">How it works</a></li>
+      <li class="hide-m"><a href="#list">The List</a></li>
+      <li class="hide-m"><a href="#sessions">Sessions</a></li>
+      <li><a href="#sessions" class="btn btn-red" style="font-size:.9rem;padding:.45em 1.1em">Pull up a chair</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+    <div class="hero-art reveal">
+      <img src="images/hero.png" alt="Sketch of five students in discussion around a table stacked with books, post-its and coffee">
+    </div>
+    <div class="hero-text">
+        <p class="mono">Belgrade · <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a> · every two weeks · in English</p>
+        <h1 style="margin-top:14px">Books that change <span class="sticky">minds.</span><br>Conversations that <span class="redline">test them.</span></h1>
+        <p class="lede">A book club for Belgrade students. Big ideas, real discussions, every two weeks at <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a>. In English. <span class="highlight">Bring opinions.</span></p>
+        <div class="cta-row">
+          <span class="hero-note">seats are capped: 16 per session</span>
+          <a class="btn btn-red" href="#sessions">Reserve a seat</a>
+        </div>
+    </div>
+</header>
+
+<hr class="divider">
+
+<section class="quote reveal">
+  <div class="container">
+    <div class="board">
+      <blockquote>"Your success in life will be determined largely by your ability to <span class="redline">speak</span>, your ability to <span class="redline">write</span>, and the quality of your <span class="redline">ideas</span>."</blockquote>
+      <p class="attribution mono">Patrick Winston, MIT</p>
+      <div class="legs">
+        <span class="sticky">speak<small>the discussions</small></span>
+        <span class="sticky alt">write<small>the margin notes</small></span>
+        <span class="sticky alt2">ideas<small>the books</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section-pad" id="editor">
+  <div class="container">
+    <span class="kicker mono">A note from the editor</span>
+    <div class="editor-grid" style="margin-top:18px">
+      <div class="editor-comp reveal">
+        <img src="images/editor.png" alt="Pencil sketch portrait of Luka Babic with sketchbook annotations" class="blend portrait">
+        <p class="caption mono">Luka Babic · founder of the club</p>
+      </div>
+      <div class="letter reveal">
+        <p>I started this book club for a selfish reason: I wanted to read more. And, perhaps more importantly, I wanted to remember more of what I read.</p>
+        <p>Reading alone is easy. Holding on to an idea, however, is harder. I've found that <span class="highlight">the books that stay with me are usually the ones I've had the chance to argue about</span>, question, connect to something else, or hear interpreted through someone else's eyes.</p>
+        <p>So I suggested we start a book club at <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a>, and a small group of students decided to read with me.</p>
+        <p>We began simply: one book at a time, a room full of curious people, and a conversation every two weeks.</p>
+        <p>After our first season, it felt worth opening the table to others.</p>
+        <p>The books we choose are the kinds of books you might find on a CEO's desk, a professor's shelf, or in the hands of someone trying to better understand how the world works. We are not interested in idolizing CEOs or today's leaders. We are interested in understanding what they read, which ideas shape the way they think, and how those ideas, in turn, shape the world we all live in.</p>
+        <p>And when we can, we invite professors, practitioners, authors, business leaders, and other interesting voices to join us at the table.</p>
+        <p>The groups stay small: 10 to 16 people. We meet every fortnight, in person, and everyone is expected to have something to say.</p>
+        <p>If you know a student who wants to read more, finds these books interesting, thinks more carefully about what they read, and remembers more by discussing it with others, send them our way.</p>
+        <p><span class="highlight">There's always room for another good reader.</span></p>
+        <div class="signoff">
+          <span class="signature">Luka Babic</span>
+          <span class="credentials mono">Co-Founder, stealth life sciences startup · Exited tech founder and CEO (Orgnostic → Culture Amp) · Venture Partner @ Emerge VC · Founder and Program Director, Psychology and Business undergraduate studies @ <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a> · Harvard '12</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section-pad" id="how">
+  <div class="container two-col">
+    <div class="text">
+      <span class="kicker mono">How it works</span>
+      <h2>One book. One circle. Every two weeks.</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="num">1</span>
+          <h3>Vote</h3>
+          <p>Members shortlist from The List below and vote on what we read next. Your club, your syllabus.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">2</span>
+          <h3>Discuss</h3>
+          <p>Small facilitated tables. No lectures, no professors, no wrong answers.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">3</span>
+          <h3>Keep it</h3>
+          <p>A few days later, the Margin Notes land in your inbox: what we argued about, what we kept.</p>
+        </div>
+      </div>
+      <div class="callouts">
+        <div class="callout reveal">
+          <p class="big">Didn't finish the book? <span class="redline">Come anyway.</span></p>
+          <p class="small">The first 20 minutes catch you up.</p>
+        </div>
+        <div class="callout reveal">
+          <p class="big">Seats are capped at 16.</p>
+          <p class="small">Bigger night? We run a fishbowl: an inner circle debates, the outer circle listens, and people rotate in.</p>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <img src="images/note2.png" alt="Flat lay sketch of a notebook with diagrams, an e-reader, sticky notes and a pencil" class="blend">
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section-pad" id="list">
+  <div class="container">
+    <div class="list-intro">
+      <span class="kicker mono">The List</span>
+      <h2>The first 50.</h2>
+      <p>Fifty books about power, technology, organizations, human nature, judgment, and the ideas that shape the people shaping the world. Read in any order; argued about in ours.</p>
+    </div>
+    <div class="list-hero reveal">
+      <img src="images/thelist.png" alt="Sketch collage of a book stack, an open sketchbook, an e-reader and post-it notes reading Select and Read" class="blend">
+    </div>
+    <div class="list-scroll reveal">
+<div class="cat-head"><span class="cat-num">01</span><h3>Power, Institutions &amp; Society</h3><span class="tagline">Who gets power, who keeps it, and why do some institutions succeed while others fail?</span></div>
+<article class="book"><span class="book-num">01</span><div><div><h4>The Dictator's Handbook</h4><span class="author">Bruce Bueno de Mesquita &amp; Alastair Smith</span><span class="badge-read">read · season one</span></div><p class="book-why">A ruthless model of how leaders acquire and retain power through incentives, coalitions, and loyalty. Its logic travels surprisingly well from governments to companies, boards, and institutions.</p><div class="book-meta"><span class="prov">READ · Season One</span><a href="https://www.amazon.com/s?k=The+Dictator%27s+Handbook+Bruce+Bueno+de+Mesquita+Alastair+Smith" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">02</span><div><div><h4>Careless People</h4><span class="author">Sarah Wynn-Williams</span></div><p class="book-why">An insider's critical account of Facebook turns abstract questions about corporate responsibility into decisions made by identifiable people inside one of the world's most powerful organizations.</p><div class="book-meta"><span class="prov">LEADER CASE · Meta and its leadership</span><a href="https://www.amazon.com/s?k=Careless+People+Sarah+Wynn-Williams" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">03</span><div><div><h4>Power and Progress</h4><span class="author">Daron Acemoglu &amp; Simon Johnson</span></div><p class="book-why">Technology does not automatically create broadly shared prosperity. Institutions, incentives, and power determine who benefits from technological change. A crucial framework for thinking about AI.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · Acemoglu &amp; Johnson</span><a href="https://www.amazon.com/s?k=Power+and+Progress+Daron+Acemoglu+Simon+Johnson" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">04</span><div><div><h4>Nature, Culture, and Inequality</h4><span class="author">Thomas Piketty</span></div><p class="book-why">Asks how much inequality is natural and how much is created by political, cultural, and institutional choices. A compact way into one of the defining questions of modern capitalism.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · Thomas Piketty</span><a href="https://www.amazon.com/s?k=Nature+Culture+and+Inequality+Thomas+Piketty" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">05</span><div><div><h4>What Happened to Liberal Democracy?</h4><span class="author">Daron Acemoglu</span></div><p class="book-why">Connects economic insecurity, technology, weakened institutions, and declining political legitimacy. Particularly relevant for a generation experiencing populism, protest, and institutional distrust firsthand.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · Daron Acemoglu</span><a href="https://www.amazon.com/s?k=What+Happened+to+Liberal+Democracy+Daron+Acemoglu" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">06</span><div><div><h4>Why Nations Fail</h4><span class="author">Daron Acemoglu &amp; James A. Robinson</span></div><p class="book-why">Makes institutions central to explaining why some societies become prosperous while others stagnate. Its thesis is intuitive enough to grasp immediately and ambitious enough to debate for hours.</p><div class="book-meta"><span class="prov">NOBEL-LINKED IDEA · Acemoglu, Robinson &amp; Johnson</span><a href="https://www.amazon.com/s?k=Why+Nations+Fail+Daron+Acemoglu+James+Robinson" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">07</span><div><div><h4>The Revolt of the Public</h4><span class="author">Martin Gurri</span></div><p class="book-why">Explores how information abundance destroys institutional authority faster than new institutions can replace it. Highly relevant to social media, decentralized protest, and contemporary political movements.</p><div class="book-meta"><span class="prov">CLUB PICK · Power, information &amp; legitimacy</span><a href="https://www.amazon.com/s?k=The+Revolt+of+the+Public+Martin+Gurri" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">08</span><div><div><h4>Seeing Like a State</h4><span class="author">James C. Scott</span></div><p class="book-why">Shows how institutions simplify complicated human systems in order to measure and control them, often with disastrous unintended consequences. The framework applies equally well to companies, metrics, and algorithms.</p><div class="book-meta"><span class="prov">CLUB PICK · Institutions, measurement &amp; unintended consequences</span><a href="https://www.amazon.com/s?k=Seeing+Like+a+State+James+C+Scott" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">09</span><div><div><h4>The Black Jacobins</h4><span class="author">C. L. R. James</span></div><p class="book-why">The Haitian Revolution becomes a study of leadership, culture, ideology, and institutional change under extreme conditions. It takes leadership discussion far outside the conventional business canon.</p><div class="book-meta"><span class="prov">RECOMMENDED BY · Ben Horowitz</span><a href="https://www.amazon.com/s?k=The+Black+Jacobins+C+L+R+James" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">10</span><div><div><h4>The Machiavellians</h4><span class="author">James Burnham</span></div><p class="book-why">A realist theory of elites, institutions, and power beneath official political narratives. A natural intellectual successor to *The Dictator's Handbook*, but from a different tradition.</p><div class="book-meta"><span class="prov">SHAPED · Marc Andreessen</span><a href="https://www.amazon.com/s?k=The+Machiavellians+James+Burnham" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+
+<div class="cat-head"><span class="cat-num">02</span><h3>Technology, Progress &amp; the Future</h3><span class="tagline">How do science and technology reshape civilization, and is progress ever inevitable?</span></div>
+<article class="book"><span class="book-num">11</span><div><div><h4>The Fabric of Reality</h4><span class="author">David Deutsch</span></div><p class="book-why">Connects quantum physics, evolution, computation, and epistemology into one attempt to explain reality. Difficult, but exactly the kind of book capable of changing the framework through which someone sees problems.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · David Deutsch</span><a href="https://www.amazon.com/s?k=The+Fabric+of+Reality+David+Deutsch" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">12</span><div><div><h4>The Beginning of Infinity</h4><span class="author">David Deutsch</span></div><p class="book-why">Makes a radical case for explanatory knowledge, optimism, and the proposition that problems are soluble through better explanations. It turns progress itself into a philosophical question.</p><div class="book-meta"><span class="prov">SHAPED · Naval Ravikant</span><a href="https://www.amazon.com/s?k=The+Beginning+of+Infinity+David+Deutsch" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">13</span><div><div><h4>Foundation</h4><span class="author">Isaac Asimov</span></div><p class="book-why">Science fiction becomes a laboratory for thinking about civilizational decline, prediction, institutions, and whether exceptional individuals can alter the course of history.</p><div class="book-meta"><span class="prov">SHAPED · Demis Hassabis · Elon Musk</span><a href="https://www.amazon.com/s?k=Foundation+Isaac+Asimov" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">14</span><div><div><h4>The Three-Body Problem</h4><span class="author">Liu Cixin</span></div><p class="book-why">Uses science fiction to explore scientific progress, existential risk, strategic uncertainty, and humanity's reaction to a civilization operating on a completely different technological scale.</p><div class="book-meta"><span class="prov">CLUB PICK · Civilization, science &amp; existential strategy</span><a href="https://www.amazon.com/s?k=The+Three-Body+Problem+Cixin+Liu" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">15</span><div><div><h4>The Structure of Scientific Revolutions</h4><span class="author">Thomas S. Kuhn</span></div><p class="book-why">The source of the modern idea of a paradigm shift. It asks whether progress really occurs gradually, or when an old explanation can no longer accommodate what we observe.</p><div class="book-meta"><span class="prov">FOUNDATIONAL IDEA · Thomas Kuhn</span><a href="https://www.amazon.com/s?k=The+Structure+of+Scientific+Revolutions+Thomas+Kuhn" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">16</span><div><div><h4>The Idea Factory</h4><span class="author">Jon Gertner</span></div><p class="book-why">Bell Labs becomes an experiment in how institutions produce breakthroughs. What mix of extraordinary people, freedom, resources, collaboration, and patience actually creates innovation?</p><div class="book-meta"><span class="prov">INNOVATION CASE · Bell Labs</span><a href="https://www.amazon.com/s?k=The+Idea+Factory+Jon+Gertner" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">17</span><div><div><h4>Chip War</h4><span class="author">Chris Miller</span></div><p class="book-why">Semiconductors connect scientific progress, industrial policy, geopolitics, national security, and corporate strategy. It exposes the physical infrastructure underneath the supposedly intangible digital economy.</p><div class="book-meta"><span class="prov">CLUB PICK · Technology meets geopolitics</span><a href="https://www.amazon.com/s?k=Chip+War+Chris+Miller" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">18</span><div><div><h4>The Coming Wave</h4><span class="author">Mustafa Suleyman &amp; Michael Bhaskar</span></div><p class="book-why">One of the builders of modern AI asks whether increasingly capable AI and biotechnology can actually be contained. It places technological ambition directly against questions of governance and control.</p><div class="book-meta"><span class="prov">LEADER PERSPECTIVE · Mustafa Suleyman · DeepMind</span><a href="https://www.amazon.com/s?k=The+Coming+Wave+Mustafa+Suleyman" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">19</span><div><div><h4>Empire of AI</h4><span class="author">Karen Hao</span></div><p class="book-why">A critical account of frontier AI, its ideology, capital requirements, and concentration of power. Useful precisely because it challenges the narrative technology companies often tell about themselves.</p><div class="book-meta"><span class="prov">LEADER CASE · OpenAI and the frontier AI ecosystem</span><a href="https://www.amazon.com/s?k=Empire+of+AI+Karen+Hao" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">20</span><div><div><h4>How the World Really Works</h4><span class="author">Vaclav Smil</span></div><p class="book-why">A data-driven explanation of the physical systems beneath modern civilization: energy, food, materials, globalization, and the environment. A corrective to technological thinking that ignores physical constraints.</p><div class="book-meta"><span class="prov">RECOMMENDED BY · Bill Gates calls Smil his favorite author</span><a href="https://www.amazon.com/s?k=How+the+World+Really+Works+Vaclav+Smil" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+
+<div class="cat-head"><span class="cat-num">03</span><h3>Building Organizations</h3><span class="tagline">How do ideas become companies, institutions, and systems that actually work?</span></div>
+<article class="book"><span class="book-num">21</span><div><div><h4>The Cold Start Problem</h4><span class="author">Andrew Chen</span></div><p class="book-why">Explains how networks begin before network effects exist. One of the more practical books on the shelf, giving students a concrete framework for understanding marketplaces, platforms, and product growth.</p><div class="book-meta"><span class="prov">OPERATOR PERSPECTIVE · Andrew Chen · a16z</span><a href="https://www.amazon.com/s?k=The+Cold+Start+Problem+Andrew+Chen" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">22</span><div><div><h4>High Output Management</h4><span class="author">Andrew S. Grove</span></div><p class="book-why">A rigorous attempt to define what managers actually do: leverage, meetings, teams, output, and performance. Useful for comparing systematic management with contemporary ideas about founder-led companies.</p><div class="book-meta"><span class="prov">LEADER PERSPECTIVE · Andy Grove · Intel</span><a href="https://www.amazon.com/s?k=High+Output+Management+Andrew+Grove" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">23</span><div><div><h4>Creativity, Inc.</h4><span class="author">Ed Catmull</span></div><p class="book-why">Pixar becomes a laboratory for designing organizations where talented people can challenge one another, recover from failure, and repeatedly create rather than merely getting lucky once.</p><div class="book-meta"><span class="prov">LEADER PERSPECTIVE · Ed Catmull · Pixar</span><a href="https://www.amazon.com/s?k=Creativity+Inc+Ed+Catmull" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">24</span><div><div><h4>Sam Walton: Made in America</h4><span class="author">Sam Walton</span></div><p class="book-why">A firsthand account of customer obsession, frugality, experimentation, and operating discipline. It allows comparison between pre-internet retail entrepreneurship and today's platform businesses.</p><div class="book-meta"><span class="prov">LEADER PERSPECTIVE · Sam Walton · Walmart</span><a href="https://www.amazon.com/s?k=Sam+Walton+Made+in+America" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">25</span><div><div><h4>Shoe Dog</h4><span class="author">Phil Knight</span></div><p class="book-why">One of the better antidotes to retrospective founder mythology. Nike's creation appears uncertain, cash-starved, and contingent rather than an inevitable journey toward greatness.</p><div class="book-meta"><span class="prov">LEADER PERSPECTIVE · Phil Knight · Nike</span><a href="https://www.amazon.com/s?k=Shoe+Dog+Phil+Knight" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">26</span><div><div><h4>The Goal</h4><span class="author">Eliyahu M. Goldratt</span></div><p class="book-why">A business novel built around one powerful idea: optimizing every component does not necessarily optimize the system. Bottlenecks, constraints, and throughput become surprisingly intuitive.</p><div class="book-meta"><span class="prov">RECOMMENDED BY · Jeff Bezos · Amazon</span><a href="https://www.amazon.com/s?k=The+Goal+Eliyahu+Goldratt" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">27</span><div><div><h4>The Outsiders</h4><span class="author">William N. Thorndike</span></div><p class="book-why">Reframes the CEO's job around capital allocation rather than charisma or management fashion. Eight unconventional CEOs become competing answers to the question of what a CEO actually controls.</p><div class="book-meta"><span class="prov">RECOMMENDED BY · Warren Buffett</span><a href="https://www.amazon.com/s?k=The+Outsiders+William+Thorndike" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">28</span><div><div><h4>The Ride of a Lifetime</h4><span class="author">Robert Iger</span></div><p class="book-why">A concise firsthand account of leading Disney through Pixar, Marvel, Lucasfilm, and major technological disruption. Particularly useful for discussing judgment, acquisitions, creative organizations, and succession.</p><div class="book-meta"><span class="prov">LEADER PERSPECTIVE · Bob Iger · Disney</span><a href="https://www.amazon.com/s?k=The+Ride+of+a+Lifetime+Robert+Iger" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">29</span><div><div><h4>The Innovator's Dilemma</h4><span class="author">Clayton Christensen</span></div><p class="book-why">Explains the paradox that excellent management can cause successful companies to miss disruptive change. One of the most useful frameworks for understanding incumbent failure.</p><div class="book-meta"><span class="prov">SHAPED · Steve Jobs · Andy Grove · Jeff Bezos</span><a href="https://www.amazon.com/s?k=The+Innovator%27s+Dilemma+Clayton+Christensen" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">30</span><div><div><h4>Business Adventures</h4><span class="author">John Brooks</span></div><p class="book-why">Business told through messy human stories rather than formulas. Product failures, markets, incentives, communication, and organizational behavior remain strikingly recognizable decades later.</p><div class="book-meta"><span class="prov">RECOMMENDED BY · Warren Buffett · Bill Gates</span><a href="https://www.amazon.com/s?k=Business+Adventures+John+Brooks" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+
+<div class="cat-head"><span class="cat-num">04</span><h3>Judgment, Decisions &amp; Mental Models</h3><span class="tagline">How do we reason, learn, predict, and make decisions under uncertainty?</span></div>
+<article class="book"><span class="book-num">31</span><div><div><h4>Range</h4><span class="author">David Epstein</span><span class="badge-read">read · season one</span></div><p class="book-why">Challenges early specialization and argues for breadth, experimentation, and analogical thinking in unpredictable environments. Particularly relevant to students being asked to specialize before they have explored enough.</p><div class="book-meta"><span class="prov">READ · Season One</span><a href="https://www.amazon.com/s?k=Range+David+Epstein" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">32</span><div><div><h4>Intuition Pumps and Other Tools for Thinking</h4><span class="author">Daniel C. Dennett</span></div><p class="book-why">A collection of conceptual tools for testing arguments and exposing bad reasoning. The deeper question is whether mental models illuminate reality or sometimes trick us into believing we understand it.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · Daniel Dennett</span><a href="https://www.amazon.com/s?k=Intuition+Pumps+Daniel+Dennett" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">33</span><div><div><h4>Black Box Thinking</h4><span class="author">Matthew Syed</span></div><p class="book-why">Treats failure as information. By contrasting systems that investigate mistakes with those that conceal them, it opens a direct discussion about learning cultures and experimentation.</p><div class="book-meta"><span class="prov">SHAPED · Daniel Ek</span><a href="https://www.amazon.com/s?k=Black+Box+Thinking+Matthew+Syed" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">34</span><div><div><h4>Thinking in Systems</h4><span class="author">Donella H. Meadows</span></div><p class="book-why">Gives readers a language for feedback loops, delays, leverage points, and unintended consequences. Organizations and societies rarely behave as neatly as their formal structures suggest.</p><div class="book-meta"><span class="prov">FOUNDATIONAL IDEA · Donella Meadows</span><a href="https://www.amazon.com/s?k=Thinking+in+Systems+Donella+Meadows" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">35</span><div><div><h4>Superforecasting</h4><span class="author">Philip E. Tetlock &amp; Dan Gardner</span></div><p class="book-why">Tests whether judgment about uncertain futures can actually be trained. A practical antidote to charismatic certainty and an excellent introduction to probabilistic thinking.</p><div class="book-meta"><span class="prov">RESEARCH-BASED · Philip Tetlock</span><a href="https://www.amazon.com/s?k=Superforecasting+Philip+Tetlock+Dan+Gardner" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">36</span><div><div><h4>Poor Charlie's Almanack</h4><span class="author">Charles T. Munger</span></div><p class="book-why">Builds decision-making around mental models borrowed from psychology, economics, mathematics, and science. Its central claim is that breadth across disciplines produces better judgment.</p><div class="book-meta"><span class="prov">LEADER PERSPECTIVE · Charlie Munger</span><a href="https://www.amazon.com/s?k=Poor+Charlie%27s+Almanack+Charles+Munger" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">37</span><div><div><h4>Antifragile</h4><span class="author">Nassim Nicholas Taleb</span></div><p class="book-why">Goes beyond resilience to ask which systems actually improve through volatility. Useful for thinking about companies, careers, markets, and why eliminating uncertainty can sometimes make systems weaker.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · Nassim Nicholas Taleb</span><a href="https://www.amazon.com/s?k=Antifragile+Nassim+Nicholas+Taleb" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">38</span><div><div><h4>The Intelligent Investor</h4><span class="author">Benjamin Graham</span></div><p class="book-why">More than an investing manual. It is about distinguishing price from value, emotional discipline, and learning to behave rationally when markets do not.</p><div class="book-meta"><span class="prov">SHAPED · Warren Buffett</span><a href="https://www.amazon.com/s?k=The+Intelligent+Investor+Benjamin+Graham" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">39</span><div><div><h4>The WEIRDest People in the World</h4><span class="author">Joseph Henrich</span></div><p class="book-why">Challenges the assumption that Western psychology is universal and traces how institutions may have reshaped cognition, families, and individualism. A bridge between psychology, anthropology, and economics.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · Joseph Henrich</span><a href="https://www.amazon.com/s?k=The+WEIRDest+People+in+the+World+Joseph+Henrich" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">40</span><div><div><h4>Surely You're Joking, Mr. Feynman!</h4><span class="author">Richard Feynman</span></div><p class="book-why">Curiosity as an operating system. Feynman's stories model skepticism of authority, joy in discovery, experimentation, and the desire to understand something for oneself rather than merely know its name.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · Richard Feynman · formative for Demis Hassabis</span><a href="https://www.amazon.com/s?k=Surely+You%27re+Joking+Mr+Feynman+Richard+Feynman" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+
+<div class="cat-head"><span class="cat-num">05</span><h3>Human Nature, Culture &amp; Status</h3><span class="tagline">Why do people imitate, compete, conform, signal, and behave the way they do?</span></div>
+<article class="book"><span class="book-num">41</span><div><div><h4>The Book of Snobs</h4><span class="author">William Makepeace Thackeray</span><span class="badge-read">read · season one</span></div><p class="book-why">Satire as social psychology. Status, imitation, taste, and small performances of belonging reveal behaviors that remain recognizable inside modern organizations and professional communities.</p><div class="book-meta"><span class="prov">READ · Season One</span><a href="https://www.amazon.com/s?k=The+Book+of+Snobs+William+Makepeace+Thackeray" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">42</span><div><div><h4>Things Hidden Since the Foundation of the World</h4><span class="author">René Girard</span></div><p class="book-why">Mimetic desire suggests that we learn what to want by observing what others want, creating imitation, competition, rivalry, and scapegoating. A powerful lens on markets, status, organizations, and politics.</p><div class="book-meta"><span class="prov">SHAPED · Peter Thiel</span><a href="https://www.amazon.com/s?k=Things+Hidden+Since+the+Foundation+of+the+World+Rene+Girard" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">43</span><div><div><h4>Amusing Ourselves to Death</h4><span class="author">Neil Postman</span></div><p class="book-why">Long before social media, Postman argued that the medium through which information reaches us changes what a society is capable of thinking about seriously. A natural intellectual sequel to *The Anxious Generation*.</p><div class="book-meta"><span class="prov">CLUB PICK · Media, attention &amp; public discourse</span><a href="https://www.amazon.com/s?k=Amusing+Ourselves+to+Death+Neil+Postman" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">44</span><div><div><h4>The Anxious Generation</h4><span class="author">Jonathan Haidt</span><span class="badge-read">read · season one</span></div><p class="book-why">A generational argument about smartphones, social media, childhood, and mental development. Its strength in the club came from students being able to compare the thesis directly with their lived experience.</p><div class="book-meta"><span class="prov">READ · Season One</span><a href="https://www.amazon.com/s?k=The+Anxious+Generation+Jonathan+Haidt" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">45</span><div><div><h4>The Ancient City</h4><span class="author">Numa Denis Fustel de Coulanges</span></div><p class="book-why">Explores how religion, family, property, and social institutions created ancient societies. Difficult, but capable of changing the categories through which a reader understands culture and institutions.</p><div class="book-meta"><span class="prov">SHAPED · Marc Andreessen</span><a href="https://www.amazon.com/s?k=The+Ancient+City+Fustel+de+Coulanges" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+
+<div class="cat-head"><span class="cat-num">06</span><h3>Meaning, Ambition &amp; a Life Well Lived</h3><span class="tagline">What is success ultimately for, and how should ambition fit into a finite human life?</span></div>
+<article class="book"><span class="book-num">46</span><div><div><h4>Man's Search for Meaning</h4><span class="author">Viktor E. Frankl</span><span class="badge-read">read · season one</span></div><p class="book-why">Meaning under extreme conditions becomes a larger discussion about agency, suffering, narrative, and what human beings require in order to continue moving forward.</p><div class="book-meta"><span class="prov">READ · Season One</span><a href="https://www.amazon.com/s?k=Man%27s+Search+for+Meaning+Viktor+Frankl" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">47</span><div><div><h4>Four Thousand Weeks</h4><span class="author">Oliver Burkeman</span></div><p class="book-why">Rejects the fantasy that productivity will eventually allow us to do everything. For ambitious students and executives, time management becomes the much deeper question of what deserves a finite life.</p><div class="book-meta"><span class="prov">CLUB PICK · Time, ambition &amp; finitude</span><a href="https://www.amazon.com/s?k=Four+Thousand+Weeks+Oliver+Burkeman" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">48</span><div><div><h4>The Remains of the Day</h4><span class="author">Kazuo Ishiguro</span></div><p class="book-why">A novel about duty, professional identity, missed choices, and regret. It asks a question management literature rarely asks: what if extraordinary devotion to work produces a life one would not choose again?</p><div class="book-meta"><span class="prov">SHAPED / FAVORITE · Jeff Bezos</span><a href="https://www.amazon.com/s?k=The+Remains+of+the+Day+Kazuo+Ishiguro" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">49</span><div><div><h4>Autobiography of a Yogi</h4><span class="author">Paramahansa Yogananda</span></div><p class="book-why">Opens the shelf to spirituality, intuition, and non-Western intellectual traditions. It is particularly interesting as part of the intellectual genealogy of one of modern technology's defining founders.</p><div class="book-meta"><span class="prov">SHAPED · Steve Jobs</span><a href="https://www.amazon.com/s?k=Autobiography+of+a+Yogi+Paramahansa+Yogananda" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+<article class="book"><span class="book-num">50</span><div><div><h4>The Lessons of History</h4><span class="author">Will &amp; Ariel Durant</span></div><p class="book-why">A remarkably short attempt to distill recurring forces across history: war, inequality, economics, religion, government, and human nature. Very little reading for a potentially enormous discussion.</p><div class="book-meta"><span class="prov">SHAPED · Ray Dalio</span><a href="https://www.amazon.com/s?k=The+Lessons+of+History+Will+Ariel+Durant" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
+    </div>
+    <p class="list-note margin-note">six shelves, fifty spines, one table ↑ scroll the shelf</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ============ SESSIONS ============
+     Cards generate themselves from the schedule config in the script at the
+     bottom of this file (search for SESSION CONFIG). Past dates drop off
+     automatically and a new future card appears; you only edit a date's entry
+     when the book is voted and the Luma event exists. -->
+<section class="section-pad" id="sessions">
+  <div class="container">
+    <div class="two-col" style="align-items:center;gap:40px;margin-bottom:34px">
+      <div>
+        <span class="kicker mono">Upcoming sessions</span>
+        <h2><span class="redline">Pull up a chair.</span></h2>
+        <p>Every other week, 18:00, at <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a>, Karađorđeva 65. Seats are capped at 16; the live count and waitlist run on Luma. Reserve and you'll get the confirmation, the reminder, and the first question by email.</p>
+        <p class="margin-note" style="margin-top:14px">bigger group that night? fishbowl setup: inner circle talks, outer circle listens, everyone rotates in</p>
+      </div>
+      <div class="reveal">
+        <img src="images/chair.png" alt="Colored pencil sketch of an empty chair with a red blanket beside a café table with an open notebook and coffee" class="blend">
+      </div>
+    </div>
+    <div class="sessions-grid" id="sessions-grid"></div>
+    <p class="sessions-note margin-note">can't make it after reserving? free the seat on Luma so the waitlist moves</p>
+    <div class="tiers reveal">
+      <div class="tier guest">
+        <h3>Guest</h3>
+        <span class="sub mono">just show up</span>
+        <ul>
+          <li>Attend any open session, no strings</li>
+          <li>Public Margin Notes highlights</li>
+          <li>Announcements channel</li>
+        </ul>
+      </div>
+      <div class="tier member">
+        <h3>Member</h3>
+        <span class="sub mono">commit for a season</span>
+        <ul>
+          <li>Vote on every book we read</li>
+          <li>Host a table and gain facilitation experience for your CV</li>
+          <li>Full Margin Notes archive</li>
+          <li>Priority seats when sessions fill up</li>
+          <li>Coffee with guest speakers, small circle</li>
+          <li>The private chat where the real conversation continues</li>
+        </ul>
+        <span class="price sticky">price: showing up</span>
+        <!-- Create the application form on tally.so (fields: name, email, faculty,
+             short motivation letter) and paste its URL below. Tally emails you each application. -->
+        <br><a class="btn btn-red apply-btn" href="https://tally.so/r/REPLACE-ME" target="_blank" rel="noopener">Apply with a short motivation letter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div style="display:flex;align-items:center;gap:12px">
+      <img src="images/logo-horizontal.png" alt="" class="mark">
+      <span class="mono">CEO's Book Club · <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a> · Belgrade</span>
+    </div>
+    <span class="mono"><a href="mailto:lbabic@fefa.edu.rs" style="text-decoration:none">lbabic@fefa.edu.rs</a></span>
+  </div>
+</footer>
+
+<script>
+/* ==================== SESSION CONFIG ====================
+   ANCHOR_DATE: any past or future session date (YYYY-MM-DD). Sessions repeat
+   every INTERVAL_DAYS from it, forever. Cards for the next CARDS_SHOWN future
+   dates render automatically; a session stays "upcoming" until END_HOUR that day.
+
+   BOOKS: when a book is voted and the Luma event is created, add one entry
+   keyed by the session date. Dates without an entry show "To be voted" and
+   link to the club's Luma calendar page (LUMA_CALENDAR).                    */
+const ANCHOR_DATE   = "2026-08-27";
+const INTERVAL_DAYS = 14;
+const CARDS_SHOWN   = 3;
+const SESSION_TIME  = "18:00";
+const END_HOUR      = 21; /* card rolls over after 21:00 on session day */
+const LUMA_CALENDAR = "https://luma.com/ceobookclub";
+const BOOKS = {
+  /* an entry may have just a url (event exists, book not voted yet) */
+  "2026-08-27": { title:"Why Nations Fail", author:"Daron Acemoglu & James A. Robinson", url:"https://luma.com/5y9z1sa9" },
+  "2026-09-10": { url:"https://luma.com/j1ztz4z6" },
+};
+/* ======================================================== */
+
+function nextSessions(){
+  const anchor = new Date(ANCHOR_DATE + "T00:00:00");
+  const now = new Date();
+  const msPerDay = 864e5, step = INTERVAL_DAYS * msPerDay;
+  /* first cycle index whose session hasn't ended yet */
+  let k = Math.ceil((now - anchor - END_HOUR*36e5) / step);
+  if (k < 0) k = 0;
+  return Array.from({length: CARDS_SHOWN}, (_,i) => new Date(anchor.getTime() + (k+i)*step));
+}
+function key(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function renderSessions(){
+  const grid = document.getElementById('sessions-grid');
+  if (!grid) return;
+  const fmt = new Intl.DateTimeFormat('en-GB',{weekday:'short',month:'short',day:'numeric'});
+  grid.innerHTML = nextSessions().map((d,i) => {
+    const b = BOOKS[key(d)] || {};
+    const title  = b.title  || (i===0 ? "To be voted" : "To be voted at the previous session");
+    const author = b.author || "three candidates from The List";
+    const url    = b.url    || LUMA_CALENDAR;
+    return `<div class="session-card reveal visible">
+      ${i===0 ? '<span class="tag-next sticky">next up</span>' : ''}
+      <span class="date">${fmt.format(d)}</span>
+      <span class="time mono">${SESSION_TIME} · FEFA · in English</span>
+      <span class="book-title">${title}</span>
+      <span class="book-author">${author}</span>
+      <a class="btn${i===0 ? ' btn-red' : ''}" href="${url}" target="_blank" rel="noopener">Reserve on Luma</a>
+    </div>`;
+  }).join('');
+}
+renderSessions();
+
+const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
