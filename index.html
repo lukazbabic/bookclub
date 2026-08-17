@@ -110,6 +110,7 @@ nav{position:sticky;top:0;z-index:900;background:color-mix(in srgb,var(--paper-d
 .nav-links{display:flex;gap:26px;align-items:center;list-style:none}
 .nav-links a{font-family:var(--font-mono);font-weight:500;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;position:relative}
 .nav-links a:hover{color:var(--red)}
+.nav-links .btn{font-size:.9rem;padding:.45em 1.1em;white-space:nowrap}
 .nav-links a:not(.btn)::after,.footer-inner a::after{
   content:"";position:absolute;left:0;right:0;bottom:-5px;height:4px;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'%3E%3Cpath d='M2 4 C 25 2, 60 5, 98 3' fill='none' stroke='%23B3402A' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
@@ -287,10 +288,14 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
   .two-col,.editor-grid,.callouts,.tiers{grid-template-columns:1fr;gap:32px}
   .steps{grid-template-columns:1fr;gap:26px}
   .editor-comp{position:static;max-width:290px;margin:0 auto}
-  .nav-links{gap:16px}
+  .nav-inner{padding:6px 14px}
+  .nav-links{gap:8px}
   .nav-links li.hide-m{display:none}
-  .nav-logo .mark{height:42px}
-  .nav-logo .wordmark{height:34px}
+  .nav-links .btn{font-size:.78rem;padding:.42em .8em}
+  .lang-btn{font-size:.7rem;padding:4px 8px}
+  .nav-logo{gap:6px}
+  .nav-logo .mark{height:38px}
+  .nav-logo .wordmark{height:30px}
   .section-pad{padding:60px 0}
   .hero{padding:24px 0 12px;flex-direction:column;align-items:stretch}
   .hero::after{display:none}
@@ -325,6 +330,8 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
   .callout{padding:18px 20px}
   .tier{padding:22px 20px}
   .btn{font-size:.95rem}
+  .nav-logo .wordmark{display:none}
+  .nav-logo .mark{height:42px}
 }
 </style>
 </head>
@@ -341,7 +348,7 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
       <li class="hide-m"><a href="#how" data-i18n="nav_how">How it works</a></li>
       <li class="hide-m"><a href="#list" data-i18n="nav_list">The List</a></li>
       <li class="hide-m"><a href="#sessions" data-i18n="nav_sessions">Sessions</a></li>
-      <li><a href="#sessions" class="btn btn-red" style="font-size:.9rem;padding:.45em 1.1em" data-i18n="nav_cta">Pull up a chair</a></li>
+      <li><a href="#sessions" class="btn btn-red" data-i18n="nav_cta">Pull up a chair</a></li>
       <li><button id="lang-toggle" class="lang-btn" type="button" aria-label="Switch language">SR</button></li>
     </ul>
   </div>
