@@ -231,6 +231,12 @@ h2{font-family:var(--font-display);font-weight:600;font-size:clamp(1.7rem,3.4vw,
 .book-meta a:hover{text-decoration:underline}
 .list-note{text-align:center;margin-top:18px}
 
+/* language toggle */
+.lang-btn{font-family:var(--font-mono);font-weight:500;font-size:.78rem;letter-spacing:.1em;
+  background:none;border:1.5px solid var(--pencil);border-radius:3px;padding:5px 10px;
+  cursor:pointer;color:var(--pencil);transition:all .15s ease}
+.lang-btn:hover{color:var(--red);border-color:var(--red)}
+
 /* sessions */
 .sessions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:30px}
 .session-card{
@@ -331,11 +337,12 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
       <img src="images/logo-wordmark.webp" alt="CEO's Book Club" class="wordmark">
     </a>
     <ul class="nav-links">
-      <li class="hide-m"><a href="#editor">The editor</a></li>
-      <li class="hide-m"><a href="#how">How it works</a></li>
-      <li class="hide-m"><a href="#list">The List</a></li>
-      <li class="hide-m"><a href="#sessions">Sessions</a></li>
-      <li><a href="#sessions" class="btn btn-red" style="font-size:.9rem;padding:.45em 1.1em">Pull up a chair</a></li>
+      <li class="hide-m"><a href="#editor" data-i18n="nav_editor">The editor</a></li>
+      <li class="hide-m"><a href="#how" data-i18n="nav_how">How it works</a></li>
+      <li class="hide-m"><a href="#list" data-i18n="nav_list">The List</a></li>
+      <li class="hide-m"><a href="#sessions" data-i18n="nav_sessions">Sessions</a></li>
+      <li><a href="#sessions" class="btn btn-red" style="font-size:.9rem;padding:.45em 1.1em" data-i18n="nav_cta">Pull up a chair</a></li>
+      <li><button id="lang-toggle" class="lang-btn" type="button" aria-label="Switch language">SR</button></li>
     </ul>
   </div>
 </nav>
@@ -345,12 +352,12 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
       <img src="images/hero.webp" alt="Sketch of five students in discussion around a table stacked with books, post-its and coffee">
     </div>
     <div class="hero-text">
-        <p class="mono">Belgrade · <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a> · every two weeks · in English</p>
-        <h1 style="margin-top:14px">Books that change <span class="sticky">minds.</span><br>Conversations that <span class="redline">test them.</span></h1>
-        <p class="lede">A book club for Belgrade students. Big ideas, real discussions, every two weeks at <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a>. In English. <span class="highlight">Bring opinions.</span></p>
+        <p class="mono" data-i18n="hero_label">Belgrade · <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a> · every two weeks · in English</p>
+        <h1 style="margin-top:14px" data-i18n="hero_h1">Books that change <span class="sticky">minds.</span><br>Conversations that <span class="redline">test them.</span></h1>
+        <p class="lede" data-i18n="hero_lede">A book club for Belgrade students. Big ideas, real discussions, every two weeks at <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a>. In English. <span class="highlight">Bring opinions.</span></p>
         <div class="cta-row">
-          <span class="hero-note">seats are capped: 16 per session</span>
-          <a class="btn btn-red" href="#sessions">Reserve a seat</a>
+          <span class="hero-note" data-i18n="hero_note">seats are capped: 16 per session</span>
+          <a class="btn btn-red" href="#sessions" data-i18n="hero_btn">Reserve a seat</a>
         </div>
     </div>
 </header>
@@ -360,12 +367,12 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
 <section class="quote reveal">
   <div class="container">
     <div class="board">
-      <blockquote>"Your success in life will be determined largely by your ability to <span class="redline">speak</span>, your ability to <span class="redline">write</span>, and the quality of your <span class="redline">ideas</span>."</blockquote>
+      <blockquote data-i18n="quote_bq">"Your success in life will be determined largely by your ability to <span class="redline">speak</span>, your ability to <span class="redline">write</span>, and the quality of your <span class="redline">ideas</span>."</blockquote>
       <p class="attribution mono">Patrick Winston, MIT</p>
       <div class="legs">
-        <span class="sticky">speak<small>the discussions</small></span>
-        <span class="sticky alt">write<small>the margin notes</small></span>
-        <span class="sticky alt2">ideas<small>the books</small></span>
+        <span class="sticky" data-i18n="leg1">speak<small>the discussions</small></span>
+        <span class="sticky alt" data-i18n="leg2">write<small>the margin notes</small></span>
+        <span class="sticky alt2" data-i18n="leg3">ideas<small>the books</small></span>
       </div>
     </div>
   </div>
@@ -375,23 +382,23 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
 
 <section class="section-pad" id="editor">
   <div class="container">
-    <span class="kicker mono">A note from the editor</span>
+    <span class="kicker mono" data-i18n="ed_kicker">A note from the editor</span>
     <div class="editor-grid" style="margin-top:18px">
       <div class="editor-comp reveal">
         <img src="images/editor.webp" alt="Pencil sketch portrait of Luka Babic with sketchbook annotations" class="blend portrait">
-        <p class="caption mono">Luka Babic · founder of the club</p>
+        <p class="caption mono" data-i18n="ed_caption">Luka Babic · founder of the club</p>
       </div>
       <div class="letter reveal">
-        <p>I started this book club for a selfish reason: I wanted to read more. And, perhaps more importantly, I wanted to remember more of what I read.</p>
-        <p>Reading alone is easy. Holding on to an idea, however, is harder. I've found that <span class="highlight">the books that stay with me are usually the ones I've had the chance to argue about</span>, question, connect to something else, or hear interpreted through someone else's eyes.</p>
-        <p>So I suggested we start a book club at <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a>, and a small group of students decided to read with me.</p>
-        <p>We began simply: one book at a time, a room full of curious people, and a conversation every two weeks.</p>
-        <p>After our first season, it felt worth opening the table to others.</p>
-        <p>The books we choose are the kinds of books you might find on a CEO's desk, a professor's shelf, or in the hands of someone trying to better understand how the world works. We are not interested in idolizing CEOs or today's leaders. We are interested in understanding what they read, which ideas shape the way they think, and how those ideas, in turn, shape the world we all live in.</p>
-        <p>And when we can, we invite professors, practitioners, authors, business leaders, and other interesting voices to join us at the table.</p>
-        <p>The groups stay small: 10 to 16 people. We meet every fortnight, in person, and everyone is expected to have something to say.</p>
-        <p>If you know a student who wants to read more, finds these books interesting, thinks more carefully about what they read, and remembers more by discussing it with others, send them our way.</p>
-        <p><span class="highlight">There's always room for another good reader.</span></p>
+        <p data-i18n="ed_p1">I started this book club for a selfish reason: I wanted to read more. And, perhaps more importantly, I wanted to remember more of what I read.</p>
+        <p data-i18n="ed_p2">Reading alone is easy. Holding on to an idea, however, is harder. I've found that <span class="highlight">the books that stay with me are usually the ones I've had the chance to argue about</span>, question, connect to something else, or hear interpreted through someone else's eyes.</p>
+        <p data-i18n="ed_p3">So I suggested we start a book club at <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a>, and a small group of students decided to read with me.</p>
+        <p data-i18n="ed_p4">We began simply: one book at a time, a room full of curious people, and a conversation every two weeks.</p>
+        <p data-i18n="ed_p5">After our first season, it felt worth opening the table to others.</p>
+        <p data-i18n="ed_p6">The books we choose are the kinds of books you might find on a CEO's desk, a professor's shelf, or in the hands of someone trying to better understand how the world works. We are not interested in idolizing CEOs or today's leaders. We are interested in understanding what they read, which ideas shape the way they think, and how those ideas, in turn, shape the world we all live in.</p>
+        <p data-i18n="ed_p7">And when we can, we invite professors, practitioners, authors, business leaders, and other interesting voices to join us at the table.</p>
+        <p data-i18n="ed_p8">The groups stay small: 10 to 16 people. We meet every fortnight, in person, and everyone is expected to have something to say.</p>
+        <p data-i18n="ed_p9">If you know a student who wants to read more, finds these books interesting, thinks more carefully about what they read, and remembers more by discussing it with others, send them our way.</p>
+        <p data-i18n="ed_p10"><span class="highlight">There's always room for another good reader.</span></p>
         <div class="signoff">
           <span class="signature">Luka Babic</span>
           <span class="credentials mono">Co-Founder, stealth life sciences startup · Exited tech founder and CEO (Orgnostic → Culture Amp) · Venture Partner @ Emerge VC · Founder and Program Director, Psychology and Business undergraduate studies @ <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a> · Harvard '12</span>
@@ -406,33 +413,33 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
 <section class="section-pad" id="how">
   <div class="container two-col">
     <div class="text">
-      <span class="kicker mono">How it works</span>
-      <h2>One book. One circle. Every two weeks.</h2>
+      <span class="kicker mono" data-i18n="how_kicker">How it works</span>
+      <h2 data-i18n="how_h2">One book. One circle. Every two weeks.</h2>
       <div class="steps">
         <div class="step reveal">
           <span class="num">1</span>
-          <h3>Vote</h3>
-          <p>Members shortlist from The List below and vote on what we read next. Your club, your syllabus.</p>
+          <h3 data-i18n="s1h">Vote</h3>
+          <p data-i18n="s1p">Members shortlist from The List below and vote on what we read next. Your club, your syllabus.</p>
         </div>
         <div class="step reveal">
           <span class="num">2</span>
-          <h3>Discuss</h3>
-          <p>Small facilitated tables. No lectures, no professors, no wrong answers.</p>
+          <h3 data-i18n="s2h">Discuss</h3>
+          <p data-i18n="s2p">Small facilitated tables. No lectures, no professors, no wrong answers.</p>
         </div>
         <div class="step reveal">
           <span class="num">3</span>
-          <h3>Keep it</h3>
-          <p>A few days later, the Margin Notes land in your inbox: what we argued about, what we kept.</p>
+          <h3 data-i18n="s3h">Keep it</h3>
+          <p data-i18n="s3p">A few days later, the Margin Notes land in your inbox: what we argued about, what we kept.</p>
         </div>
       </div>
       <div class="callouts">
         <div class="callout reveal">
-          <p class="big">Didn't finish the book? <span class="redline">Come anyway.</span></p>
-          <p class="small">The first 20 minutes catch you up.</p>
+          <p class="big" data-i18n="c1b">Didn't finish the book? <span class="redline">Come anyway.</span></p>
+          <p class="small" data-i18n="c1s">The first 20 minutes catch you up.</p>
         </div>
         <div class="callout reveal">
-          <p class="big">Seats are capped at 16.</p>
-          <p class="small">Bigger night? We run a fishbowl: an inner circle debates, the outer circle listens, and people rotate in.</p>
+          <p class="big" data-i18n="c2b">Seats are capped at 16.</p>
+          <p class="small" data-i18n="c2s">Bigger night? We run a fishbowl: an inner circle debates, the outer circle listens, and people rotate in.</p>
         </div>
       </div>
     </div>
@@ -447,15 +454,15 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
 <section class="section-pad" id="list">
   <div class="container">
     <div class="list-intro">
-      <span class="kicker mono">The List</span>
-      <h2>The first 50.</h2>
-      <p>Fifty books about power, technology, organizations, human nature, judgment, and the ideas that shape the people shaping the world. Read in any order; argued about in ours.</p>
+      <span class="kicker mono" data-i18n="list_kicker">The List</span>
+      <h2 data-i18n="list_h2">The first 50.</h2>
+      <p data-i18n="list_intro">Fifty books about power, technology, organizations, human nature, judgment, and the ideas that shape the people shaping the world. Read in any order; argued about in ours.</p>
     </div>
     <div class="list-hero reveal">
       <img src="images/thelist.webp" alt="Sketch collage of a book stack, an open sketchbook, an e-reader and post-it notes reading Select and Read" class="blend">
     </div>
     <div class="list-scroll reveal">
-<div class="cat-head"><span class="cat-num">01</span><h3>Power, Institutions &amp; Society</h3><span class="tagline">Who gets power, who keeps it, and why do some institutions succeed while others fail?</span></div>
+<div class="cat-head"><span class="cat-num">01</span><h3 data-i18n="cat1">Power, Institutions &amp; Society</h3><span class="tagline" data-i18n="cat1t">Who gets power, who keeps it, and why do some institutions succeed while others fail?</span></div>
 <article class="book"><span class="book-num">01</span><div><div><h4>The Dictator's Handbook</h4><span class="author">Bruce Bueno de Mesquita &amp; Alastair Smith</span><span class="badge-read">read · season one</span></div><p class="book-why">A ruthless model of how leaders acquire and retain power through incentives, coalitions, and loyalty. Its logic travels surprisingly well from governments to companies, boards, and institutions.</p><div class="book-meta"><span class="prov">READ · Season One</span><a href="https://www.amazon.com/s?k=The+Dictator%27s+Handbook+Bruce+Bueno+de+Mesquita+Alastair+Smith" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">02</span><div><div><h4>Careless People</h4><span class="author">Sarah Wynn-Williams</span></div><p class="book-why">An insider's critical account of Facebook turns abstract questions about corporate responsibility into decisions made by identifiable people inside one of the world's most powerful organizations.</p><div class="book-meta"><span class="prov">LEADER CASE · Meta and its leadership</span><a href="https://www.amazon.com/s?k=Careless+People+Sarah+Wynn-Williams" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">03</span><div><div><h4>Power and Progress</h4><span class="author">Daron Acemoglu &amp; Simon Johnson</span></div><p class="book-why">Technology does not automatically create broadly shared prosperity. Institutions, incentives, and power determine who benefits from technological change. A crucial framework for thinking about AI.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · Acemoglu &amp; Johnson</span><a href="https://www.amazon.com/s?k=Power+and+Progress+Daron+Acemoglu+Simon+Johnson" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
@@ -467,7 +474,7 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
 <article class="book"><span class="book-num">09</span><div><div><h4>The Black Jacobins</h4><span class="author">C. L. R. James</span></div><p class="book-why">The Haitian Revolution becomes a study of leadership, culture, ideology, and institutional change under extreme conditions. It takes leadership discussion far outside the conventional business canon.</p><div class="book-meta"><span class="prov">RECOMMENDED BY · Ben Horowitz</span><a href="https://www.amazon.com/s?k=The+Black+Jacobins+C+L+R+James" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">10</span><div><div><h4>The Machiavellians</h4><span class="author">James Burnham</span></div><p class="book-why">A realist theory of elites, institutions, and power beneath official political narratives. A natural intellectual successor to *The Dictator's Handbook*, but from a different tradition.</p><div class="book-meta"><span class="prov">SHAPED · Marc Andreessen</span><a href="https://www.amazon.com/s?k=The+Machiavellians+James+Burnham" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 
-<div class="cat-head"><span class="cat-num">02</span><h3>Technology, Progress &amp; the Future</h3><span class="tagline">How do science and technology reshape civilization, and is progress ever inevitable?</span></div>
+<div class="cat-head"><span class="cat-num">02</span><h3 data-i18n="cat2">Technology, Progress &amp; the Future</h3><span class="tagline" data-i18n="cat2t">How do science and technology reshape civilization, and is progress ever inevitable?</span></div>
 <article class="book"><span class="book-num">11</span><div><div><h4>The Fabric of Reality</h4><span class="author">David Deutsch</span></div><p class="book-why">Connects quantum physics, evolution, computation, and epistemology into one attempt to explain reality. Difficult, but exactly the kind of book capable of changing the framework through which someone sees problems.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · David Deutsch</span><a href="https://www.amazon.com/s?k=The+Fabric+of+Reality+David+Deutsch" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">12</span><div><div><h4>The Beginning of Infinity</h4><span class="author">David Deutsch</span></div><p class="book-why">Makes a radical case for explanatory knowledge, optimism, and the proposition that problems are soluble through better explanations. It turns progress itself into a philosophical question.</p><div class="book-meta"><span class="prov">SHAPED · Naval Ravikant</span><a href="https://www.amazon.com/s?k=The+Beginning+of+Infinity+David+Deutsch" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">13</span><div><div><h4>Foundation</h4><span class="author">Isaac Asimov</span></div><p class="book-why">Science fiction becomes a laboratory for thinking about civilizational decline, prediction, institutions, and whether exceptional individuals can alter the course of history.</p><div class="book-meta"><span class="prov">SHAPED · Demis Hassabis · Elon Musk</span><a href="https://www.amazon.com/s?k=Foundation+Isaac+Asimov" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
@@ -479,7 +486,7 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
 <article class="book"><span class="book-num">19</span><div><div><h4>Empire of AI</h4><span class="author">Karen Hao</span></div><p class="book-why">A critical account of frontier AI, its ideology, capital requirements, and concentration of power. Useful precisely because it challenges the narrative technology companies often tell about themselves.</p><div class="book-meta"><span class="prov">LEADER CASE · OpenAI and the frontier AI ecosystem</span><a href="https://www.amazon.com/s?k=Empire+of+AI+Karen+Hao" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">20</span><div><div><h4>How the World Really Works</h4><span class="author">Vaclav Smil</span></div><p class="book-why">A data-driven explanation of the physical systems beneath modern civilization: energy, food, materials, globalization, and the environment. A corrective to technological thinking that ignores physical constraints.</p><div class="book-meta"><span class="prov">RECOMMENDED BY · Bill Gates calls Smil his favorite author</span><a href="https://www.amazon.com/s?k=How+the+World+Really+Works+Vaclav+Smil" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 
-<div class="cat-head"><span class="cat-num">03</span><h3>Building Organizations</h3><span class="tagline">How do ideas become companies, institutions, and systems that actually work?</span></div>
+<div class="cat-head"><span class="cat-num">03</span><h3 data-i18n="cat3">Building Organizations</h3><span class="tagline" data-i18n="cat3t">How do ideas become companies, institutions, and systems that actually work?</span></div>
 <article class="book"><span class="book-num">21</span><div><div><h4>The Cold Start Problem</h4><span class="author">Andrew Chen</span></div><p class="book-why">Explains how networks begin before network effects exist. One of the more practical books on the shelf, giving students a concrete framework for understanding marketplaces, platforms, and product growth.</p><div class="book-meta"><span class="prov">OPERATOR PERSPECTIVE · Andrew Chen · a16z</span><a href="https://www.amazon.com/s?k=The+Cold+Start+Problem+Andrew+Chen" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">22</span><div><div><h4>High Output Management</h4><span class="author">Andrew S. Grove</span></div><p class="book-why">A rigorous attempt to define what managers actually do: leverage, meetings, teams, output, and performance. Useful for comparing systematic management with contemporary ideas about founder-led companies.</p><div class="book-meta"><span class="prov">LEADER PERSPECTIVE · Andy Grove · Intel</span><a href="https://www.amazon.com/s?k=High+Output+Management+Andrew+Grove" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">23</span><div><div><h4>Creativity, Inc.</h4><span class="author">Ed Catmull</span></div><p class="book-why">Pixar becomes a laboratory for designing organizations where talented people can challenge one another, recover from failure, and repeatedly create rather than merely getting lucky once.</p><div class="book-meta"><span class="prov">LEADER PERSPECTIVE · Ed Catmull · Pixar</span><a href="https://www.amazon.com/s?k=Creativity+Inc+Ed+Catmull" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
@@ -491,7 +498,7 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
 <article class="book"><span class="book-num">29</span><div><div><h4>The Innovator's Dilemma</h4><span class="author">Clayton Christensen</span></div><p class="book-why">Explains the paradox that excellent management can cause successful companies to miss disruptive change. One of the most useful frameworks for understanding incumbent failure.</p><div class="book-meta"><span class="prov">SHAPED · Steve Jobs · Andy Grove · Jeff Bezos</span><a href="https://www.amazon.com/s?k=The+Innovator%27s+Dilemma+Clayton+Christensen" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">30</span><div><div><h4>Business Adventures</h4><span class="author">John Brooks</span></div><p class="book-why">Business told through messy human stories rather than formulas. Product failures, markets, incentives, communication, and organizational behavior remain strikingly recognizable decades later.</p><div class="book-meta"><span class="prov">RECOMMENDED BY · Warren Buffett · Bill Gates</span><a href="https://www.amazon.com/s?k=Business+Adventures+John+Brooks" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 
-<div class="cat-head"><span class="cat-num">04</span><h3>Judgment, Decisions &amp; Mental Models</h3><span class="tagline">How do we reason, learn, predict, and make decisions under uncertainty?</span></div>
+<div class="cat-head"><span class="cat-num">04</span><h3 data-i18n="cat4">Judgment, Decisions &amp; Mental Models</h3><span class="tagline" data-i18n="cat4t">How do we reason, learn, predict, and make decisions under uncertainty?</span></div>
 <article class="book"><span class="book-num">31</span><div><div><h4>Range</h4><span class="author">David Epstein</span><span class="badge-read">read · season one</span></div><p class="book-why">Challenges early specialization and argues for breadth, experimentation, and analogical thinking in unpredictable environments. Particularly relevant to students being asked to specialize before they have explored enough.</p><div class="book-meta"><span class="prov">READ · Season One</span><a href="https://www.amazon.com/s?k=Range+David+Epstein" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">32</span><div><div><h4>Intuition Pumps and Other Tools for Thinking</h4><span class="author">Daniel C. Dennett</span></div><p class="book-why">A collection of conceptual tools for testing arguments and exposing bad reasoning. The deeper question is whether mental models illuminate reality or sometimes trick us into believing we understand it.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · Daniel Dennett</span><a href="https://www.amazon.com/s?k=Intuition+Pumps+Daniel+Dennett" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">33</span><div><div><h4>Black Box Thinking</h4><span class="author">Matthew Syed</span></div><p class="book-why">Treats failure as information. By contrasting systems that investigate mistakes with those that conceal them, it opens a direct discussion about learning cultures and experimentation.</p><div class="book-meta"><span class="prov">SHAPED · Daniel Ek</span><a href="https://www.amazon.com/s?k=Black+Box+Thinking+Matthew+Syed" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
@@ -503,21 +510,21 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
 <article class="book"><span class="book-num">39</span><div><div><h4>The WEIRDest People in the World</h4><span class="author">Joseph Henrich</span></div><p class="book-why">Challenges the assumption that Western psychology is universal and traces how institutions may have reshaped cognition, families, and individualism. A bridge between psychology, anthropology, and economics.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · Joseph Henrich</span><a href="https://www.amazon.com/s?k=The+WEIRDest+People+in+the+World+Joseph+Henrich" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">40</span><div><div><h4>Surely You're Joking, Mr. Feynman!</h4><span class="author">Richard Feynman</span></div><p class="book-why">Curiosity as an operating system. Feynman's stories model skepticism of authority, joy in discovery, experimentation, and the desire to understand something for oneself rather than merely know its name.</p><div class="book-meta"><span class="prov">THINKER PERSPECTIVE · Richard Feynman · formative for Demis Hassabis</span><a href="https://www.amazon.com/s?k=Surely+You%27re+Joking+Mr+Feynman+Richard+Feynman" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 
-<div class="cat-head"><span class="cat-num">05</span><h3>Human Nature, Culture &amp; Status</h3><span class="tagline">Why do people imitate, compete, conform, signal, and behave the way they do?</span></div>
+<div class="cat-head"><span class="cat-num">05</span><h3 data-i18n="cat5">Human Nature, Culture &amp; Status</h3><span class="tagline" data-i18n="cat5t">Why do people imitate, compete, conform, signal, and behave the way they do?</span></div>
 <article class="book"><span class="book-num">41</span><div><div><h4>The Book of Snobs</h4><span class="author">William Makepeace Thackeray</span><span class="badge-read">read · season one</span></div><p class="book-why">Satire as social psychology. Status, imitation, taste, and small performances of belonging reveal behaviors that remain recognizable inside modern organizations and professional communities.</p><div class="book-meta"><span class="prov">READ · Season One</span><a href="https://www.amazon.com/s?k=The+Book+of+Snobs+William+Makepeace+Thackeray" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">42</span><div><div><h4>Things Hidden Since the Foundation of the World</h4><span class="author">René Girard</span></div><p class="book-why">Mimetic desire suggests that we learn what to want by observing what others want, creating imitation, competition, rivalry, and scapegoating. A powerful lens on markets, status, organizations, and politics.</p><div class="book-meta"><span class="prov">SHAPED · Peter Thiel</span><a href="https://www.amazon.com/s?k=Things+Hidden+Since+the+Foundation+of+the+World+Rene+Girard" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">43</span><div><div><h4>Amusing Ourselves to Death</h4><span class="author">Neil Postman</span></div><p class="book-why">Long before social media, Postman argued that the medium through which information reaches us changes what a society is capable of thinking about seriously. A natural intellectual sequel to *The Anxious Generation*.</p><div class="book-meta"><span class="prov">CLUB PICK · Media, attention &amp; public discourse</span><a href="https://www.amazon.com/s?k=Amusing+Ourselves+to+Death+Neil+Postman" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">44</span><div><div><h4>The Anxious Generation</h4><span class="author">Jonathan Haidt</span><span class="badge-read">read · season one</span></div><p class="book-why">A generational argument about smartphones, social media, childhood, and mental development. Its strength in the club came from students being able to compare the thesis directly with their lived experience.</p><div class="book-meta"><span class="prov">READ · Season One</span><a href="https://www.amazon.com/s?k=The+Anxious+Generation+Jonathan+Haidt" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">45</span><div><div><h4>The Ancient City</h4><span class="author">Numa Denis Fustel de Coulanges</span></div><p class="book-why">Explores how religion, family, property, and social institutions created ancient societies. Difficult, but capable of changing the categories through which a reader understands culture and institutions.</p><div class="book-meta"><span class="prov">SHAPED · Marc Andreessen</span><a href="https://www.amazon.com/s?k=The+Ancient+City+Fustel+de+Coulanges" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 
-<div class="cat-head"><span class="cat-num">06</span><h3>Meaning, Ambition &amp; a Life Well Lived</h3><span class="tagline">What is success ultimately for, and how should ambition fit into a finite human life?</span></div>
+<div class="cat-head"><span class="cat-num">06</span><h3 data-i18n="cat6">Meaning, Ambition &amp; a Life Well Lived</h3><span class="tagline" data-i18n="cat6t">What is success ultimately for, and how should ambition fit into a finite human life?</span></div>
 <article class="book"><span class="book-num">46</span><div><div><h4>Man's Search for Meaning</h4><span class="author">Viktor E. Frankl</span><span class="badge-read">read · season one</span></div><p class="book-why">Meaning under extreme conditions becomes a larger discussion about agency, suffering, narrative, and what human beings require in order to continue moving forward.</p><div class="book-meta"><span class="prov">READ · Season One</span><a href="https://www.amazon.com/s?k=Man%27s+Search+for+Meaning+Viktor+Frankl" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">47</span><div><div><h4>Four Thousand Weeks</h4><span class="author">Oliver Burkeman</span></div><p class="book-why">Rejects the fantasy that productivity will eventually allow us to do everything. For ambitious students and executives, time management becomes the much deeper question of what deserves a finite life.</p><div class="book-meta"><span class="prov">CLUB PICK · Time, ambition &amp; finitude</span><a href="https://www.amazon.com/s?k=Four+Thousand+Weeks+Oliver+Burkeman" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">48</span><div><div><h4>The Remains of the Day</h4><span class="author">Kazuo Ishiguro</span></div><p class="book-why">A novel about duty, professional identity, missed choices, and regret. It asks a question management literature rarely asks: what if extraordinary devotion to work produces a life one would not choose again?</p><div class="book-meta"><span class="prov">SHAPED / FAVORITE · Jeff Bezos</span><a href="https://www.amazon.com/s?k=The+Remains+of+the+Day+Kazuo+Ishiguro" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">49</span><div><div><h4>Autobiography of a Yogi</h4><span class="author">Paramahansa Yogananda</span></div><p class="book-why">Opens the shelf to spirituality, intuition, and non-Western intellectual traditions. It is particularly interesting as part of the intellectual genealogy of one of modern technology's defining founders.</p><div class="book-meta"><span class="prov">SHAPED · Steve Jobs</span><a href="https://www.amazon.com/s?k=Autobiography+of+a+Yogi+Paramahansa+Yogananda" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
 <article class="book"><span class="book-num">50</span><div><div><h4>The Lessons of History</h4><span class="author">Will &amp; Ariel Durant</span></div><p class="book-why">A remarkably short attempt to distill recurring forces across history: war, inequality, economics, religion, government, and human nature. Very little reading for a potentially enormous discussion.</p><div class="book-meta"><span class="prov">SHAPED · Ray Dalio</span><a href="https://www.amazon.com/s?k=The+Lessons+of+History+Will+Ariel+Durant" target="_blank" rel="noopener">Get the book ↗</a></div></div></article>
     </div>
-    <p class="list-note margin-note">six shelves, fifty spines, one table ↑ scroll the shelf</p>
+    <p class="list-note margin-note" data-i18n="list_note">six shelves, fifty spines, one table ↑ scroll the shelf</p>
   </div>
 </section>
 
@@ -532,42 +539,42 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
   <div class="container">
     <div class="two-col" style="align-items:center;gap:40px;margin-bottom:34px">
       <div>
-        <span class="kicker mono">Upcoming sessions</span>
-        <h2><span class="redline">Pull up a chair.</span></h2>
-        <p>Every other week, 18:00, at <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a>, Karađorđeva 65. Seats are capped at 16; the live count and waitlist run on Luma. Reserve and you'll get the confirmation, the reminder, and the first question by email.</p>
-        <p class="margin-note" style="margin-top:14px">bigger group that night? fishbowl setup: inner circle talks, outer circle listens, everyone rotates in</p>
+        <span class="kicker mono" data-i18n="sess_kicker">Upcoming sessions</span>
+        <h2 data-i18n="sess_h2"><span class="redline">Pull up a chair.</span></h2>
+        <p data-i18n="sess_para">Every other week, 18:00, at <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a>, Karađorđeva 65. Seats are capped at 16; the live count and waitlist run on Luma. Reserve and you'll get the confirmation, the reminder, and the first question by email.</p>
+        <p class="margin-note" style="margin-top:14px" data-i18n="sess_fish">bigger group that night? fishbowl setup: inner circle talks, outer circle listens, everyone rotates in</p>
       </div>
       <div class="reveal">
         <img src="images/chair.webp" alt="Colored pencil sketch of an empty chair with a red blanket beside a café table with an open notebook and coffee" class="blend">
       </div>
     </div>
     <div class="sessions-grid" id="sessions-grid"></div>
-    <p class="sessions-note margin-note">can't make it after reserving? free the seat on Luma so the waitlist moves</p>
+    <p class="sessions-note margin-note" data-i18n="sess_note">can't make it after reserving? free the seat on Luma so the waitlist moves</p>
     <div class="tiers reveal">
       <div class="tier guest">
-        <h3>Guest</h3>
-        <span class="sub mono">just show up</span>
+        <h3 data-i18n="tg_h">Guest</h3>
+        <span class="sub mono" data-i18n="tg_sub">just show up</span>
         <ul>
-          <li>Attend any open session, no strings</li>
-          <li>Public Margin Notes highlights</li>
-          <li>Announcements channel</li>
+          <li data-i18n="tg1">Attend any open session, no strings</li>
+          <li data-i18n="tg2">Public Margin Notes highlights</li>
+          <li data-i18n="tg3">Announcements channel</li>
         </ul>
       </div>
       <div class="tier member">
-        <h3>Member</h3>
-        <span class="sub mono">commit for a season</span>
+        <h3 data-i18n="tm_h">Member</h3>
+        <span class="sub mono" data-i18n="tm_sub">commit for a season</span>
         <ul>
-          <li>Vote on every book we read</li>
-          <li>Host a table and gain facilitation experience for your CV</li>
-          <li>Full Margin Notes archive</li>
-          <li>Priority seats when sessions fill up</li>
-          <li>Coffee with guest speakers, small circle</li>
-          <li>The private chat where the real conversation continues</li>
+          <li data-i18n="tm1">Vote on every book we read</li>
+          <li data-i18n="tm2">Host a table and gain facilitation experience for your CV</li>
+          <li data-i18n="tm3">Full Margin Notes archive</li>
+          <li data-i18n="tm4">Priority seats when sessions fill up</li>
+          <li data-i18n="tm5">Coffee with guest speakers, small circle</li>
+          <li data-i18n="tm6">The private chat where the real conversation continues</li>
         </ul>
-        <span class="price sticky">price: showing up</span>
+        <span class="price sticky" data-i18n="tm_price">price: showing up</span>
         <!-- Create the application form on tally.so (fields: name, email, faculty,
              short motivation letter) and paste its URL below. Tally emails you each application. -->
-        <br><a class="btn btn-red apply-btn" href="https://tally.so/r/gDP12d" target="_blank" rel="noopener">Apply with a short motivation letter</a>
+        <br><a class="btn btn-red apply-btn" href="https://tally.so/r/gDP12d" target="_blank" rel="noopener" data-i18n="tm_apply">Apply with a short motivation letter</a>
       </div>
     </div>
   </div>
@@ -617,27 +624,136 @@ function nextSessions(){
   }
   return out.slice(0, CARDS_SHOWN);
 }
+
+/* ==================== LANGUAGE SWITCHER ==================== */
+const SR = {
+"nav_editor": "Urednik",
+"nav_how": "Kako funkcioniše",
+"nav_list": "Spisak",
+"nav_sessions": "Termini",
+"nav_cta": "Privuci stolicu",
+"hero_label": "Beograd · <a href=\"https://www.fefa.edu.rs/\" target=\"_blank\" rel=\"noopener\" class=\"fefa-link\">FEFA</a> · svake dve nedelje · na engleskom",
+"hero_h1": "Knjige koje oblikuju <span class=\"sticky\">stavove.</span><br>Razgovori koji ih <span class=\"redline\">preispituju.</span>",
+"hero_lede": "Čitalački klub za studente u Beogradu. Velike ideje, prave rasprave, svake dve nedelje na <a href=\"https://www.fefa.edu.rs/\" target=\"_blank\" rel=\"noopener\" class=\"fefa-link\">FEFA</a>. Na engleskom. <span class=\"highlight\">Ponesi argumente.</span>",
+"hero_note": "broj mesta je ograničen: 16 po terminu",
+"hero_btn": "Rezerviši mesto",
+"quote_bq": "\"Vaš uspeh u životu u najvećoj meri će zavisiti od vaše sposobnosti da <span class=\"redline\">govorite</span>, sposobnosti da <span class=\"redline\">pišete</span> i od kvaliteta vaših <span class=\"redline\">ideja</span>.\"",
+"leg1": "govor<small>diskusije</small>",
+"leg2": "pisanje<small>margin notes</small>",
+"leg3": "ideje<small>knjige</small>",
+"ed_kicker": "Beleška urednika",
+"ed_caption": "Luka Babić · osnivač kluba",
+"ed_p1": "Ovaj čitalački klub pokrenuo sam iz sebičnog razloga: želeo sam da čitam više. I, možda još važnije, želeo sam da zapamtim više od onoga što pročitam.",
+"ed_p2": "Čitati u samoći je lako. Zadržati ideju je, međutim, teže. Primetio sam da su <span class=\"highlight\">knjige koje ostanu sa mnom obično one o kojima sam imao priliku da raspravljam</span>, da ih preispitujem, povežem sa nečim drugim ili čujem protumačene očima nekog drugog.",
+"ed_p3": "Zato sam predložio da pokrenemo čitalački klub na <a href=\"https://www.fefa.edu.rs/\" target=\"_blank\" rel=\"noopener\" class=\"fefa-link\">FEFA</a>, i mala grupa studenata odlučila je da čita sa mnom.",
+"ed_p4": "Počeli smo jednostavno: jedna knjiga, soba puna radoznalih ljudi i razgovor svake dve nedelje.",
+"ed_p5": "Posle prve sezone, učinilo nam se vrednim da sto otvorimo i za druge.",
+"ed_p6": "Knjige koje biramo su one koje biste mogli zateći na stolu nekog direktora, na polici profesora ili u rukama nekoga ko pokušava bolje da razume kako svet funkcioniše. Ne zanima nas idolizovanje direktora ili današnjih lidera. Zanima nas šta oni čitaju, koje ideje oblikuju način na koji misle i kako te ideje, zauzvrat, oblikuju svet u kome svi živimo.",
+"ed_p7": "A kad god možemo, pozivamo profesore, praktičare, autore, poslovne lidere i druge zanimljive glasove da nam se pridruže za stolom.",
+"ed_p8": "Grupe ostaju male: 10 do 16 ljudi. Sastajemo se svake dve nedelje, uživo, i od svakoga se očekuje da ima nešto da kaže.",
+"ed_p9": "Ako znaš studenta koji želi da čita više, koga ove knjige zanimaju, ko želi pažljivije da razmišlja o pročitanom i da pamti više kroz razgovor sa drugima, pošalji ga kod nas.",
+"ed_p10": "<span class=\"highlight\">Uvek ima mesta za još jednog dobrog čitaoca.</span>",
+"how_kicker": "Kako funkcioniše",
+"how_h2": "Jedna knjiga. Jedan krug. Svake dve nedelje.",
+"s1h": "Glasaj",
+"s1p": "Članovi prave uži izbor sa Spiska ispod i glasaju šta čitamo sledeće. Tvoj klub, tvoj program.",
+"s2h": "Diskutuj",
+"s2p": "Mali moderirani stolovi. Bez predavanja, bez profesora, bez pogrešnih odgovora.",
+"s3h": "Zapamti",
+"s3p": "Nekoliko dana kasnije stižu ti Margin Notes: o čemu smo raspravljali, šta smo zadržali.",
+"c1b": "Nisi završio/la knjigu? <span class=\"redline\">Dođi svejedno.</span>",
+"c1s": "Prvih 20 minuta te uvodi u temu.",
+"c2b": "Broj mesta je ograničen na 16.",
+"c2s": "Veća grupa te večeri? Radimo fishbowl: unutrašnji krug raspravlja, spoljašnji sluša, svi se rotiraju.",
+"list_kicker": "Spisak",
+"list_h2": "Prvih 50.",
+"list_intro": "Pedeset knjiga o moći, tehnologiji, organizacijama, ljudskoj prirodi, prosuđivanju i idejama koje oblikuju ljude koji oblikuju svet. Čitaj bilo kojim redom; raspravljamo našim.",
+"list_note": "šest polica, pedeset naslova, jedan sto ↑ listaj policu",
+"cat1": "Moć, institucije i društvo",
+"cat1t": "Ko dobija moć, ko je zadržava i zašto neke institucije uspevaju dok druge propadaju?",
+"cat2": "Tehnologija, napredak i budućnost",
+"cat2t": "Kako nauka i tehnologija preoblikuju civilizaciju i da li je napredak ikada neizbežan?",
+"cat3": "Građenje organizacija",
+"cat3t": "Kako ideje postaju kompanije, institucije i sistemi koji zaista funkcionišu?",
+"cat4": "Prosuđivanje, odluke i mentalni modeli",
+"cat4t": "Kako rasuđujemo, učimo, predviđamo i donosimo odluke u neizvesnosti?",
+"cat5": "Ljudska priroda, kultura i status",
+"cat5t": "Zašto ljudi imitiraju, takmiče se, prilagođavaju, signaliziraju i ponašaju se tako kako se ponašaju?",
+"cat6": "Smisao, ambicija i dobro proživljen život",
+"cat6t": "Čemu uspeh na kraju služi i kako ambicija treba da stane u konačan ljudski život?",
+"sess_kicker": "Predstojeći termini",
+"sess_h2": "<span class=\"redline\">Privuci stolicu.</span>",
+"sess_para": "Svake druge nedelje, u 18:00, na <a href=\"https://www.fefa.edu.rs/\" target=\"_blank\" rel=\"noopener\" class=\"fefa-link\">FEFA</a>, Karađorđeva 65. Broj mesta je ograničen na 16; broj prijavljenih i lista čekanja vode se na Lumi. Rezerviši i mejlom ti stižu potvrda, podsetnik i prvo pitanje.",
+"sess_fish": "veća grupa te večeri? fishbowl: unutrašnji krug razgovara, spoljašnji sluša, svi se rotiraju",
+"sess_note": "ne možeš da dođeš posle rezervacije? oslobodi mesto na Lumi da se lista čekanja pomeri",
+"tg_h": "Gost",
+"tg_sub": "samo se pojavi",
+"tg1": "Dođi na bilo koji otvoren termin, bez obaveza",
+"tg2": "Javni izvodi iz Margin Notes",
+"tg3": "Kanal sa obaveštenjima",
+"tm_h": "Član",
+"tm_sub": "posveti se sezoni",
+"tm1": "Glasaj o svakoj knjizi koju čitamo",
+"tm2": "Vodi sto i stekni iskustvo moderacije za CV",
+"tm3": "Kompletna arhiva Margin Notes",
+"tm4": "Prednost pri rezervaciji kad se termini popune",
+"tm5": "Kafa sa gostujućim govornicima, u užem krugu",
+"tm6": "Privatni chat u kome se pravi razgovor nastavlja",
+"tm_price": "cena: pojavljivanje",
+"tm_apply": "Prijavi se uz kratko motivaciono pismo"
+};
+const EN_CACHE = {};
+const CARD_STR = {
+  en:{tbv:"To be voted",tbv2:"To be voted at the previous session",cand:"three candidates from The List",btn:"Reserve on Luma",next:"next up",time:"18:00 · FEFA · in English",locale:"en-GB",getbook:"Get the book ↗",badge:"read · season one"},
+  sr:{tbv:"Biće izglasana",tbv2:"Glasa se na prethodnom terminu",cand:"tri kandidata sa Spiska",btn:"Rezerviši na Lumi",next:"sledeći",time:"18:00 · FEFA · na engleskom",locale:"sr-Latn-RS",getbook:"Nabavi knjigu ↗",badge:"pročitano · prva sezona"}
+};
+let LANG = "en";
+try {
+  LANG = localStorage.getItem("bc_lang") ||
+         (((navigator.language||"").toLowerCase().startsWith("sr")) ? "sr" : "en");
+} catch(e){}
+function setLang(l){
+  LANG = l;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.dataset.i18n;
+    if (!(k in EN_CACHE)) EN_CACHE[k] = el.innerHTML;
+    if (l === "sr" && SR[k]) el.innerHTML = SR[k];
+    else el.innerHTML = EN_CACHE[k];
+  });
+  const cs = CARD_STR[l];
+  document.querySelectorAll(".book-meta a").forEach(a=>a.textContent = cs.getbook);
+  document.querySelectorAll(".badge-read").forEach(b=>b.textContent = cs.badge);
+  document.documentElement.lang = (l === "sr") ? "sr-Latn" : "en";
+  const t = document.getElementById("lang-toggle");
+  if (t) t.textContent = (l === "sr") ? "EN" : "SR";
+  try { localStorage.setItem("bc_lang", l); } catch(e){}
+  renderSessions();
+}
+document.getElementById("lang-toggle").addEventListener("click", ()=>setLang(LANG==="sr"?"en":"sr"));
+/* =========================================================== */
+
 function key(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function renderSessions(){
   const grid = document.getElementById('sessions-grid');
   if (!grid) return;
-  const fmt = new Intl.DateTimeFormat('en-GB',{weekday:'short',month:'short',day:'numeric'});
+  const cs = CARD_STR[LANG];
+  const fmt = new Intl.DateTimeFormat(cs.locale,{weekday:'short',month:'short',day:'numeric'});
   grid.innerHTML = nextSessions().map((d,i) => {
     const b = BOOKS[key(d)] || {};
-    const title  = b.title  || (i===0 ? "To be voted" : "To be voted at the previous session");
-    const author = b.author || "three candidates from The List";
+    const title  = b.title  || (i===0 ? cs.tbv : cs.tbv2);
+    const author = b.author || cs.cand;
     const url    = b.url    || LUMA_CALENDAR;
     return `<div class="session-card reveal visible">
-      ${i===0 ? '<span class="tag-next sticky">next up</span>' : ''}
+      ${i===0 ? '<span class="tag-next sticky">'+cs.next+'</span>' : ''}
       <span class="date">${fmt.format(d)}</span>
-      <span class="time mono">${SESSION_TIME} · FEFA · in English</span>
+      <span class="time mono">${cs.time}</span>
       <span class="book-title">${title}</span>
       <span class="book-author">${author}</span>
-      <a class="btn${i===0 ? ' btn-red' : ''}" href="${url}" target="_blank" rel="noopener">Reserve on Luma</a>
+      <a class="btn${i===0 ? ' btn-red' : ''}" href="${url}" target="_blank" rel="noopener">${cs.btn}</a>
     </div>`;
   }).join('');
 }
-renderSessions();
+setLang(LANG);
 
 const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
