@@ -278,6 +278,10 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
 .footer-inner{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
 .footer-inner .mark{height:44px;width:auto;mix-blend-mode:multiply}
 .footer-inner .hand{font-family:var(--font-hand);font-style:italic;font-size:1.05rem;color:var(--pencil)}
+.fefa-badge{display:flex;align-items:center;gap:10px;text-decoration:none}
+.fefa-badge img{height:30px;width:auto;mix-blend-mode:multiply;opacity:.92;transition:opacity .15s ease}
+.fefa-badge:hover img{opacity:1}
+.footer-inner a.fefa-badge::after{display:none}
 .footer-inner a:hover{color:var(--red)}
 
 /* reveal on scroll */
@@ -593,6 +597,10 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
       <img src="images/logo-horizontal.webp" alt="" class="mark">
       <span class="mono">CEO's Book Club · <a href="https://www.fefa.edu.rs/" target="_blank" rel="noopener" class="fefa-link">FEFA</a> · Belgrade</span>
     </div>
+    <a class="fefa-badge" href="https://www.fefa.edu.rs/" target="_blank" rel="noopener">
+      <span class="mono" data-i18n="foot_host">hosted at</span>
+      <img src="images/fefa-logo.webp" alt="FEFA Fakultet">
+    </a>
     <span class="mono"><a href="mailto:lbabic@fefa.edu.rs" style="text-decoration:none">lbabic@fefa.edu.rs</a></span>
   </div>
 </footer>
@@ -707,6 +715,7 @@ const SR = {
 "tm5": "Kafa sa gostujućim govornicima, u užem krugu",
 "tm6": "Privatni chat u kome se pravi razgovor nastavlja",
 "tm_price": "cena: pojavljivanje",
+"foot_host": "domaćin",
 "tm_apply": "Prijavi se uz kratko motivaciono pismo"
 };
 const EN_CACHE = {};
