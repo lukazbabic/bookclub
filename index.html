@@ -602,17 +602,20 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
         <br><a class="btn btn-red apply-btn" href="https://tally.so/r/gDP12d" target="_blank" rel="noopener" data-i18n="tm_apply">Apply with a short motivation letter</a>
       </div>
     </div>
-    <!-- Subscribe: sent via FormSubmit to lbabic@fefa.edu.rs. The very first
-         submission triggers a one-time activation email to that inbox; click it once. -->
+    <!-- Subscribe: Netlify Forms (form name "subscribe"). Signups appear in the
+         Netlify dashboard under Forms; email notifications to lbabic@fefa.edu.rs
+         are set there (Forms > Form notifications). -->
     <div class="subscribe reveal" id="subscribe">
       <div>
         <h3 data-i18n="sub_h">Hear about the next sessions</h3>
         <p data-i18n="sub_p">Leave your email and we'll let you know when the next book and date are set.</p>
       </div>
-      <form class="sub-form" id="sub-form" novalidate>
+      <form class="sub-form" id="sub-form" name="subscribe" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="subscribe">
         <input type="text" name="name" id="sub-name" autocomplete="name" aria-label="Name" placeholder="Name">
         <input type="email" name="email" id="sub-email" autocomplete="email" aria-label="Email" placeholder="Email" required>
-        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="language" value="en">
+        <input type="text" name="bot-field" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button type="submit" class="btn btn-red" id="sub-btn" data-i18n="sub_btn">Keep me posted</button>
         <span class="sub-status" id="sub-status" role="status" aria-live="polite"></span>
       </form>
@@ -813,27 +816,22 @@ function renderSessions(){
 setLang(LANG);
 
 /* ==================== SUBSCRIBE ==================== */
-const SUBSCRIBE_TO = "lbabic@fefa.edu.rs";
 document.getElementById("sub-form").addEventListener("submit", async ev=>{
   ev.preventDefault();
   const f = ev.target, ss = SUB_STR[LANG];
   const st = document.getElementById("sub-status"), btn = document.getElementById("sub-btn");
-  const email = f.email.value.trim(), name = f.name.value.trim();
-  if (f._honey.value) return;
+  const el = f.elements, email = el["email"].value.trim();
+  if (el["bot-field"].value) return;
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ st.className="sub-status err"; st.textContent=ss.bad; return; }
   btn.disabled = true; st.className="sub-status"; st.textContent = ss.sending;
   try{
-    const r = await fetch("https://formsubmit.co/ajax/"+SUBSCRIBE_TO,{
+    el["language"].value = LANG;
+    const r = await fetch("/",{
       method:"POST",
-      headers:{"Content-Type":"application/json","Accept":"application/json"},
-      body:JSON.stringify({
-        _subject:"CEO's Book Club: new subscriber",
-        _template:"table",
-        name:name||"(not given)", email, language:LANG, page:location.href
-      })
+      headers:{"Content-Type":"application/x-www-form-urlencoded"},
+      body:new URLSearchParams(new FormData(f)).toString()
     });
-    const j = await r.json().catch(()=>({}));
-    if (!r.ok || String(j.success)==="false") throw new Error(j.message||r.status);
+    if (!r.ok) throw new Error(r.status);
     f.reset(); st.className="sub-status ok"; st.textContent = ss.ok;
   }catch(err){
     st.className="sub-status err"; st.textContent = ss.fail;
