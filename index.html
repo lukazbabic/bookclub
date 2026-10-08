@@ -111,6 +111,7 @@ nav{position:sticky;top:0;z-index:900;background:color-mix(in srgb,var(--paper-d
 .nav-links a{font-family:var(--font-mono);font-weight:500;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;position:relative}
 .nav-links a:hover{color:var(--red)}
 .nav-links .btn{font-size:.9rem;padding:.45em 1.1em;white-space:nowrap}
+#sessions-grid,#join{scroll-margin-top:110px}
 .nav-links a:not(.btn)::after,.footer-inner a::after{
   content:"";position:absolute;left:0;right:0;bottom:-5px;height:4px;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'%3E%3Cpath d='M2 4 C 25 2, 60 5, 98 3' fill='none' stroke='%23B3402A' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
@@ -337,6 +338,12 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
   .cat-head{padding:14px 16px 10px}
   .footer-inner{flex-direction:column;text-align:center;gap:14px}
 }
+@media(max-width:600px){
+  .nav-logo .wordmark{display:none}
+  .nav-links{gap:6px}
+  .nav-links .btn{font-size:.68rem;letter-spacing:.05em;padding:.42em .6em}
+  .lang-btn{padding:4px 6px}
+}
 @media(max-width:480px){
   body{font-size:16px}
   .container{padding:0 18px}
@@ -362,11 +369,10 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
       <img src="images/logo-wordmark.webp" alt="CEO's Book Club" class="wordmark">
     </a>
     <ul class="nav-links">
-      <li class="hide-m"><a href="#editor" data-i18n="nav_editor">The editor</a></li>
       <li class="hide-m"><a href="#how" data-i18n="nav_how">How it works</a></li>
       <li class="hide-m"><a href="#list" data-i18n="nav_list">The List</a></li>
-      <li class="hide-m"><a href="#sessions" data-i18n="nav_sessions">Sessions</a></li>
-      <li><a href="#sessions" class="btn btn-red" data-i18n="nav_cta">Pull up a chair</a></li>
+      <li><a href="#sessions-grid" class="btn btn-red" data-i18n="nav_book">Book a spot</a></li>
+      <li><a href="#join" class="btn" data-i18n="nav_sub">Subscribe</a></li>
       <li><button id="lang-toggle" class="lang-btn" type="button" aria-label="Switch language">SR</button></li>
     </ul>
   </div>
@@ -575,7 +581,7 @@ footer{background:var(--paper-dark);border-top:1px solid color-mix(in srgb,var(-
     </div>
     <div class="sessions-grid" id="sessions-grid"></div>
     <p class="sessions-note margin-note" data-i18n="sess_note">can't make it after reserving? free the seat on Luma so the waitlist moves</p>
-    <div class="tiers reveal">
+    <div class="tiers reveal" id="join">
       <div class="tier guest">
         <h3 data-i18n="tg_h">Guest</h3>
         <span class="sub mono" data-i18n="tg_sub">just show up</span>
@@ -675,11 +681,10 @@ function nextSessions(){
 
 /* ==================== LANGUAGE SWITCHER ==================== */
 const SR = {
-"nav_editor": "Urednik",
 "nav_how": "Kako funkcioniše",
 "nav_list": "Spisak",
-"nav_sessions": "Termini",
-"nav_cta": "Privuci stolicu",
+"nav_book": "Rezerviši mesto",
+"nav_sub": "Pretplati se",
 "hero_label": "Beograd · <a href=\"https://www.fefa.edu.rs/\" target=\"_blank\" rel=\"noopener\" class=\"fefa-link\">FEFA</a> · svake dve nedelje · čitamo na engleskom",
 "hero_h1": "Knjige koje oblikuju <span class=\"sticky\">stavove.</span><br>Razgovori koji ih <span class=\"redline\">preispituju.</span>",
 "hero_lede": "Čitalački klub za studente u Beogradu. Velike ideje, prave rasprave, svake dve nedelje na <a href=\"https://www.fefa.edu.rs/\" target=\"_blank\" rel=\"noopener\" class=\"fefa-link\">FEFA</a>. <span class=\"highlight\">Ponesi argumente.</span>",
